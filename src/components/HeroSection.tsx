@@ -11,35 +11,41 @@ const advantages = [
 
 export const HeroSection = () => {
   return (
-    <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+    <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        {/* Large gradient circle - top right */}
-        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-primary/30 to-blue-500/30 rounded-full blur-[100px]" />
-        
-        {/* Medium gradient circle - bottom left */}
-        <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-gradient-to-tr from-purple-500/25 to-primary/25 rounded-full blur-[80px]" />
-        
-        {/* Small accent circle - center */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-400/15 rounded-full blur-[60px]" />
-        
-        {/* Grid pattern overlay */}
+        {/* Large gradient orb - top right */}
         <div 
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-60"
           style={{
-            backgroundImage: `
-              linear-gradient(to right, #6366f1 1px, transparent 1px),
-              linear-gradient(to bottom, #6366f1 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
+            background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(59,130,246,0.1) 40%, transparent 70%)'
           }}
         />
         
-        {/* Floating decorative dots */}
-        <div className="absolute top-32 left-20 w-4 h-4 bg-primary/40 rounded-full animate-pulse" />
-        <div className="absolute top-48 right-32 w-3 h-3 bg-blue-500/50 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-32 left-1/4 w-5 h-5 bg-purple-500/30 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-primary/50 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
+        {/* Medium gradient orb - bottom left */}
+        <div 
+          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-60"
+          style={{
+            background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(99,102,241,0.1) 40%, transparent 70%)'
+          }}
+        />
+        
+        {/* Subtle grid pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.15]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+        
+        {/* Floating dots */}
+        <div className="absolute top-24 left-[15%] w-3 h-3 bg-primary/40 rounded-full" />
+        <div className="absolute top-40 right-[20%] w-2 h-2 bg-blue-500/50 rounded-full" />
+        <div className="absolute bottom-24 left-[25%] w-4 h-4 bg-purple-400/30 rounded-full" />
+        <div className="absolute top-1/2 right-[15%] w-2 h-2 bg-indigo-400/40 rounded-full" />
+        <div className="absolute bottom-40 right-[30%] w-3 h-3 bg-blue-400/30 rounded-full" />
       </div>
 
       <div className="section-container relative">
