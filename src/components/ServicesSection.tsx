@@ -9,6 +9,7 @@ import {
   MessageSquare, 
   Cpu 
 } from "lucide-react";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 const services = [
   {
