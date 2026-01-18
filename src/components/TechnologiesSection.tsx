@@ -1,3 +1,5 @@
+import bitrixLogo from "@/assets/bitrix-logo.png";
+
 const technologies = [
   // Backend
   { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", category: "Backend" },
@@ -26,7 +28,7 @@ const technologies = [
   
   // CMS
   { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", category: "CMS" },
-  { name: "1С-Битрикс", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/1C_Company_logo.svg/200px-1C_Company_logo.svg.png", category: "CMS" },
+  { name: "1С-Битрикс", icon: bitrixLogo, category: "CMS" },
   
   // Database
   { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", category: "Database" },
