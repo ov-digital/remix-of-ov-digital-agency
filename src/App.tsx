@@ -25,6 +25,7 @@ const CasePage147Pacific = lazy(() => import("./pages/cases/CasePage147Pacific")
 const CasePageFishing = lazy(() => import("./pages/cases/CasePageFishing"));
 const CasePageIgra = lazy(() => import("./pages/cases/CasePageIgra"));
 const CasePageTransagro = lazy(() => import("./pages/cases/CasePageTransagro"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 
 const queryClient = new QueryClient();
 
@@ -79,6 +80,7 @@ const App = () => (
             <Route path="/cases/fishing-weekend" element={<CasePageFishing />} />
             <Route path="/cases/igra-show" element={<CasePageIgra />} />
             <Route path="/cases/transagro" element={<CasePageTransagro />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

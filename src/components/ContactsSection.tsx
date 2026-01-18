@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, Send, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,10 +14,17 @@ export const ContactsSection = () => {
     phone: "",
     message: "",
   });
+  const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!consent) {
+      toast.error("Необходимо дать согласие на обработку персональных данных");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -29,6 +38,7 @@ export const ContactsSection = () => {
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
+          consent: "Да, пользователь дал согласие на обработку персональных данных",
           _subject: `Новая заявка от ${formData.name} - OV Digital Agency`,
         }),
       });
@@ -36,6 +46,7 @@ export const ContactsSection = () => {
       if (response.ok) {
         toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
         setFormData({ name: "", email: "", phone: "", message: "" });
+        setConsent(false);
       } else {
         toast.error("Ошибка отправки. Попробуйте написать нам в Telegram.");
       }
@@ -102,7 +113,36 @@ export const ContactsSection = () => {
                   maxLength={1000}
                 />
               </div>
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              
+              {/* Consent checkbox */}
+              <div className="flex items-start space-x-3">
+                <Checkbox 
+                  id="consent-section" 
+                  checked={consent}
+                  onCheckedChange={(checked) => setConsent(checked === true)}
+                  className="mt-1"
+                />
+                <label htmlFor="consent-section" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                  Я согласен(а) на обработку моих персональных данных в соответствии с{" "}
+                  <Link 
+                    to="/privacy-policy" 
+                    target="_blank"
+                    className="text-primary hover:underline"
+                  >
+                    Политикой обработки персональных данных
+                  </Link>
+                </label>
+              </div>
+              
+              <p className="text-xs text-muted-foreground">
+                Отправляя форму, вы подтверждаете, что ознакомлены и согласны с{" "}
+                <Link to="/privacy-policy" target="_blank" className="text-primary hover:underline">
+                  Политикой обработки персональных данных
+                </Link>{" "}
+                и даёте согласие на обработку ваших персональных данных в целях связи и обработки вашей заявки.
+              </p>
+              
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting || !consent}>
                 {isSubmitting ? "Отправка..." : "Отправить заявку"}
                 <Send className="w-4 h-4 ml-2" />
               </Button>
