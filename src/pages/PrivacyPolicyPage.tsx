@@ -126,10 +126,31 @@ const PrivacyPolicyPage = () => {
               {/* 10. Контактная информация Оператора */}
               <section>
                 <h2 className="text-xl font-semibold mb-4 text-foreground">10. Контактная информация Оператора</h2>
-                <ul className="space-y-2">
-                  <li><strong>Оператор:</strong> ИП Григоренко Олеся Александровна</li>
-                  <li><strong>Контактный e-mail:</strong> <a href="mailto:ov.digital.agency@yandex.ru" className="text-primary hover:underline">ov.digital.agency@yandex.ru</a></li>
-                </ul>
+                <div className="bg-muted/50 rounded-lg p-6 space-y-3">
+                  <p className="font-medium text-foreground">Индивидуальный предприниматель Григоренко Олеся Александровна</p>
+                  <div className="grid sm:grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">ИНН:</span>{" "}
+                      <span className="font-medium">345971572610</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">ОГРНИП:</span>{" "}
+                      <span className="font-medium">325940100061282</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">E-mail:</span>{" "}
+                      <a href="mailto:ov.digital.agency@yandex.ru" className="text-primary hover:underline font-medium">
+                        ov.digital.agency@yandex.ru
+                      </a>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Телефон:</span>{" "}
+                      <a href="tel:+79782586628" className="text-primary hover:underline font-medium">
+                        +7 978 258-66-28
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               {/* 11. Изменение Политики */}
