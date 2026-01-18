@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImageDesktop from "@/assets/case-fishing-desktop.jpg";
-import caseImageMobile from "@/assets/case-fishing-mobile.jpg";
+import casePreview from "@/assets/case-fishing-preview.jpg";
+import casePages from "@/assets/case-fishing-pages.jpg";
 
 const CasePageFishing = () => {
   return (
@@ -41,52 +41,14 @@ const CasePageFishing = () => {
                 </Button>
               </div>
               
-              {/* Device mockups showcase */}
+              {/* Preview Image */}
               <div className="relative">
-                {/* Desktop mockup */}
-                <div className="relative z-10">
-                  <div className="bg-gray-800 rounded-t-xl p-2 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-400" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                      <div className="w-3 h-3 rounded-full bg-green-400" />
-                    </div>
-                    <div className="flex-1 mx-4">
-                      <div className="bg-gray-700 rounded text-xs text-gray-400 px-3 py-1 text-center">
-                        fishing-weekend.ru
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white rounded-b-xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={caseImageDesktop} 
-                      alt="Fishing Weekend - главная страница" 
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-                
-                {/* Mobile mockup - positioned to overlap */}
-                <div className="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 w-24 md:w-32 z-20">
-                  <div className="bg-gray-900 rounded-[1.5rem] p-1.5 shadow-2xl">
-                    <div className="bg-gray-900 rounded-[1.25rem] overflow-hidden">
-                      {/* Phone notch */}
-                      <div className="bg-gray-900 h-3 flex justify-center">
-                        <div className="w-12 h-2 bg-gray-800 rounded-b-lg" />
-                      </div>
-                      <div className="bg-white overflow-hidden max-h-48 md:max-h-64">
-                        <img 
-                          src={caseImageMobile} 
-                          alt="Fishing Weekend - мобильная версия" 
-                          className="w-full h-auto object-cover object-top"
-                        />
-                      </div>
-                      {/* Home indicator */}
-                      <div className="bg-gray-900 h-3 flex justify-center items-center">
-                        <div className="w-8 h-1 bg-gray-600 rounded-full" />
-                      </div>
-                    </div>
-                  </div>
+                <div className="rounded-2xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={casePreview} 
+                    alt="Fishing Weekend - превью проекта" 
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
@@ -114,6 +76,20 @@ const CasePageFishing = () => {
                   для автоматической синхронизации остатков и цен.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pages Showcase */}
+        <section className="section-padding bg-[#0a1628]">
+          <div className="section-container">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white">Страницы проекта</h2>
+            <div className="rounded-2xl overflow-hidden">
+              <img 
+                src={casePages} 
+                alt="Fishing Weekend - страницы сайта" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </section>
