@@ -12,6 +12,10 @@ import SeoPage from "./pages/services/SeoPage";
 import CrmPage from "./pages/services/CrmPage";
 import TelegramPage from "./pages/services/TelegramPage";
 import BlockchainAiPage from "./pages/services/BlockchainAiPage";
+import CasePage147Pacific from "./pages/cases/CasePage147Pacific";
+import CasePageFishing from "./pages/cases/CasePageFishing";
+import CasePageIgra from "./pages/cases/CasePageIgra";
+import CasePageTransagro from "./pages/cases/CasePageTransagro";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +34,10 @@ const App = () => (
           <Route path="/services/crm" element={<CrmPage />} />
           <Route path="/services/telegram" element={<TelegramPage />} />
           <Route path="/services/blockchain-ai" element={<BlockchainAiPage />} />
+          <Route path="/cases/147pacific" element={<CasePage147Pacific />} />
+          <Route path="/cases/fishing-weekend" element={<CasePageFishing />} />
+          <Route path="/cases/igra-show" element={<CasePageIgra />} />
+          <Route path="/cases/transagro" element={<CasePageTransagro />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

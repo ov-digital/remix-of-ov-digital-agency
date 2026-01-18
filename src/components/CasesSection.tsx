@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import caseImage1 from "@/assets/case-147pacific.jpg";
 import caseImage2 from "@/assets/case-fishing.jpg";
 import caseImage3 from "@/assets/case-igra.jpg";
@@ -10,6 +11,7 @@ const cases = [
     technology: "Python / Django + Saleor",
     description: "Интернет-магазин на headless eCommerce, кастомные интеграции, оплата и логистика",
     url: "https://147pacific.com/",
+    casePage: "/cases/147pacific",
     image: caseImage1,
   },
   {
@@ -17,6 +19,7 @@ const cases = [
     technology: "1С-Битрикс",
     description: "Корпоративный сайт с каталогом и 1С интеграцией",
     url: "https://fishing-weekend.ru/",
+    casePage: "/cases/fishing-weekend",
     image: caseImage2,
   },
   {
@@ -24,6 +27,7 @@ const cases = [
     technology: "WordPress",
     description: "Промо-сайт с кастомным дизайном",
     url: "https://igra.show",
+    casePage: "/cases/igra-show",
     image: caseImage3,
   },
   {
@@ -31,6 +35,7 @@ const cases = [
     technology: "1С-Битрикс",
     description: "Корпоративный сайт транспортной компании",
     url: "https://transagro.bxdemo.ru/",
+    casePage: "/cases/transagro",
     image: caseImage4,
   },
 ];
@@ -50,11 +55,9 @@ export const CasesSection = () => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {cases.map((caseItem) => (
-            <a
+            <Link
               key={caseItem.title}
-              href={caseItem.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              to={caseItem.casePage}
               className="group bg-background rounded-xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1"
             >
               <div className="aspect-video relative overflow-hidden">
@@ -78,7 +81,7 @@ export const CasesSection = () => {
                 </div>
                 <p className="text-muted-foreground text-sm">{caseItem.description}</p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
