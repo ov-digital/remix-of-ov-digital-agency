@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-igra.jpg";
+import caseImage from "@/assets/case-igra-preview.jpg";
 
 const CasePageIgra = () => {
   return (
