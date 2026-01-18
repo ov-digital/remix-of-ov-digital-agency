@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 interface ServicePageLayoutProps {
   title: string;
@@ -64,12 +65,12 @@ export const ServicePageLayout = ({
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" asChild>
-                    <a href="#contacts">
+                  <ContactFormPopup>
+                    <Button size="lg">
                       Обсудить проект
                       <ArrowRight className="w-5 h-5" />
-                    </a>
-                  </Button>
+                    </Button>
+                  </ContactFormPopup>
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-primary">{price}</span>
                     {priceNote && (

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
+import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { href: "#services", label: "Услуги" },
@@ -12,37 +15,53 @@ const navLinks = [
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const handleNavClick = (href: string) => {
+    if (!isHomePage) {
+      window.location.href = "/" + href;
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">OV</span>
-            </div>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="OV Digital Agency" className="h-10 w-auto" />
             <span className="font-bold text-lg hidden sm:block">Digital Agency</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
+              isHomePage ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={link.href}
+                  href={"/" + link.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button asChild>
-              <a href="#contacts">Обсудить проект</a>
-            </Button>
+            <ContactFormPopup>
+              <Button>Обсудить проект</Button>
+            </ContactFormPopup>
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,20 +79,31 @@ export const Header = () => {
           <div className="lg:hidden py-4 border-t border-border">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+                isHomePage ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={"/" + link.href}
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
-              <Button asChild className="mt-2">
-                <a href="#contacts" onClick={() => setIsMenuOpen(false)}>
+              <ContactFormPopup>
+                <Button className="mt-2" onClick={() => setIsMenuOpen(false)}>
                   Обсудить проект
-                </a>
-              </Button>
+                </Button>
+              </ContactFormPopup>
             </nav>
           </div>
         )}

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 const advantages = [
   "10+ лет опыта",
@@ -24,12 +25,12 @@ export const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <Button variant="hero" size="lg" asChild>
-              <a href="#contacts">
+            <ContactFormPopup>
+              <Button variant="hero" size="lg">
                 Обсудить проект
                 <ArrowRight size={20} />
-              </a>
-            </Button>
+              </Button>
+            </ContactFormPopup>
             <Button variant="heroOutline" size="lg" asChild>
               <a href="#cases">Смотреть кейсы</a>
             </Button>

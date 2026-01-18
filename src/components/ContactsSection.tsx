@@ -18,12 +18,32 @@ export const ContactsSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setIsSubmitting(false);
+    try {
+      const response = await fetch("https://formspree.io/f/xkgwqnpj", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          _subject: `Новая заявка от ${formData.name} - OV Digital Agency`,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast.error("Ошибка отправки. Попробуйте написать нам в Telegram.");
+      }
+    } catch (error) {
+      toast.error("Ошибка отправки. Попробуйте написать нам в Telegram.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -46,19 +66,21 @@ export const ContactsSection = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Input
-                  placeholder="Ваше имя"
+                  placeholder="Ваше имя *"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
+                  maxLength={100}
                 />
               </div>
               <div>
                 <Input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Email *"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
+                  maxLength={255}
                 />
               </div>
               <div>
@@ -67,15 +89,17 @@ export const ContactsSection = () => {
                   placeholder="Телефон"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  maxLength={20}
                 />
               </div>
               <div>
                 <Textarea
-                  placeholder="Расскажите о вашем проекте"
+                  placeholder="Расскажите о вашем проекте *"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
                   required
+                  maxLength={1000}
                 />
               </div>
               <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
