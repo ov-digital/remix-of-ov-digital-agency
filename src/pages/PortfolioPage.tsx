@@ -8,10 +8,10 @@ import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import FishingWeekendPreview from "@/components/cases/FishingWeekendPreview";
 import Pacific147Preview from "@/components/cases/Pacific147Preview";
 
-const cases = [
-  {
-    title: "147 Pacific",
-    subtitle: "Интернет-магазин диджейского оборудования",
+  const cases = [
+    {
+      title: "147 Pacific",
+      subtitle: "Интернет-магазин премиальных автомобильных аксессуаров",
     casePage: "/cases/147pacific",
     image: null,
     customPreview: Pacific147Preview,
@@ -23,15 +23,15 @@ const cases = [
     image: null,
     customPreview: FishingWeekendPreview,
   },
-  {
-    title: "Igra Show",
-    subtitle: "Промо-сайт развлекательного шоу",
+    {
+      title: "Большая игра",
+      subtitle: "Концертное агентство",
     casePage: "/cases/igra-show",
     image: caseImage3,
   },
-  {
-    title: "Транс Агро",
-    subtitle: "Корпоративный сайт дистрибьютора удобрений",
+    {
+      title: "Транс Агро",
+      subtitle: "Корпоративный сайт поставщика минеральных удобрений",
     casePage: "/cases/transagro",
     image: caseImage4,
   },
