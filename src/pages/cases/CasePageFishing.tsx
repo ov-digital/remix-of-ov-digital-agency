@@ -41,19 +41,53 @@ const CasePageFishing = () => {
                 </Button>
               </div>
               
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                {/* Desktop screenshot */}
-                <img 
-                  src={caseImageDesktop} 
-                  alt="Fishing Weekend - главная страница" 
-                  className="w-full h-auto hidden md:block"
-                />
-                {/* Mobile screenshot */}
-                <img 
-                  src={caseImageMobile} 
-                  alt="Fishing Weekend - мобильная версия" 
-                  className="w-full h-auto md:hidden"
-                />
+              {/* Device mockups showcase */}
+              <div className="relative">
+                {/* Desktop mockup */}
+                <div className="relative z-10">
+                  <div className="bg-gray-800 rounded-t-xl p-2 flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-400" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                      <div className="w-3 h-3 rounded-full bg-green-400" />
+                    </div>
+                    <div className="flex-1 mx-4">
+                      <div className="bg-gray-700 rounded text-xs text-gray-400 px-3 py-1 text-center">
+                        fishing-weekend.ru
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-b-xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={caseImageDesktop} 
+                      alt="Fishing Weekend - главная страница" 
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+                
+                {/* Mobile mockup - positioned to overlap */}
+                <div className="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 w-24 md:w-32 z-20">
+                  <div className="bg-gray-900 rounded-[1.5rem] p-1.5 shadow-2xl">
+                    <div className="bg-gray-900 rounded-[1.25rem] overflow-hidden">
+                      {/* Phone notch */}
+                      <div className="bg-gray-900 h-3 flex justify-center">
+                        <div className="w-12 h-2 bg-gray-800 rounded-b-lg" />
+                      </div>
+                      <div className="bg-white overflow-hidden max-h-48 md:max-h-64">
+                        <img 
+                          src={caseImageMobile} 
+                          alt="Fishing Weekend - мобильная версия" 
+                          className="w-full h-auto object-cover object-top"
+                        />
+                      </div>
+                      {/* Home indicator */}
+                      <div className="bg-gray-900 h-3 flex justify-center items-center">
+                        <div className="w-8 h-1 bg-gray-600 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

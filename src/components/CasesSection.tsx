@@ -1,10 +1,10 @@
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import caseImage1 from "@/assets/case-147pacific-preview.jpg";
-import caseImage2 from "@/assets/case-fishing-desktop.jpg";
 import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import bitrixLogo from "@/assets/bitrix-logo.svg";
+import FishingWeekendPreview from "./cases/FishingWeekendPreview";
 
 const cases = [
   {
@@ -23,12 +23,13 @@ const cases = [
   },
   {
     title: "Fishing Weekend",
-    subtitle: "Корпоративный сайт для рыболовной базы",
+    subtitle: "Интернет-магазин рыболовных товаров",
     description: "Корпоративный сайт с каталогом и 1С интеграцией",
     url: "https://fishing-weekend.ru/",
     casePage: "/cases/fishing-weekend",
-    image: caseImage2,
-    bgColor: "bg-gradient-to-br from-green-400 to-emerald-600",
+    image: null,
+    customPreview: FishingWeekendPreview,
+    bgColor: "bg-gradient-to-br from-sky-400 to-blue-600",
     techIcons: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
       bitrixLogo,
@@ -84,14 +85,21 @@ export const CasesSection = () => {
             >
               {/* Card with image preview */}
               <div className="rounded-2xl overflow-hidden relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-                {/* Full preview image */}
+                {/* Full preview image or custom component */}
                 <div className="relative aspect-[16/9]">
-                  <img
-                    src={caseItem.image}
-                    alt={caseItem.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
+                  {caseItem.customPreview ? (
+                    (() => {
+                      const CustomPreview = caseItem.customPreview;
+                      return <CustomPreview />;
+                    })()
+                  ) : (
+                    <img
+                      src={caseItem.image}
+                      alt={caseItem.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  )}
                   
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
