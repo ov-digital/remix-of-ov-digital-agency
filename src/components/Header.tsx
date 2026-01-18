@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ContactFormPopup } from "@/components/ContactFormPopup";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
 
 const navLinks = [
   { href: "#services", label: "Услуги", isHash: true },
@@ -29,8 +28,12 @@ export const Header = () => {
       <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="OV Digital Agency" className="h-12 w-auto" />
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-3xl md:text-4xl font-bold">
+              <span className="text-primary">O</span>
+              <span className="text-blue-600">V</span>
+            </span>
+            <span className="text-sm md:text-base font-medium text-muted-foreground">Digital Agency</span>
           </Link>
 
 {/* Desktop Navigation */}
