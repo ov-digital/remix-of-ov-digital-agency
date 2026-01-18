@@ -7,7 +7,8 @@ import {
   Search, 
   Settings, 
   MessageSquare, 
-  Cpu 
+  Cpu,
+  Server
 } from "lucide-react";
 import { ContactFormPopup } from "@/components/ContactFormPopup";
 
@@ -32,6 +33,13 @@ const services = [
     description: "Кроссплатформенные приложения на React Native и Flutter для iOS и Android",
     price: "от 300 000 ₽",
     link: "/services/mobile-apps",
+  },
+  {
+    icon: Server,
+    title: "DevOps и инфраструктура",
+    description: "Настройка серверов, Docker, Kubernetes, CI/CD, облачная архитектура",
+    price: "от 100 000 ₽",
+    link: "/services/devops",
   },
   {
     icon: Search,
