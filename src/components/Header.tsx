@@ -30,8 +30,8 @@ export const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <span className="text-3xl md:text-4xl font-bold">
-              <span className="text-primary">O</span>
-              <span className="text-blue-600">V</span>
+              <span className="text-purple-500">O</span>
+              <span className="text-blue-500">V</span>
             </span>
             <span className="text-sm md:text-base font-medium text-muted-foreground">Digital Agency</span>
           </Link>
