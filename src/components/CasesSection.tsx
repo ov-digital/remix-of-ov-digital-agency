@@ -31,9 +31,9 @@ const cases = [
     image: caseImage3,
   },
   {
-    title: "Transagro",
+    title: "Транс Агро",
     technology: "1С-Битрикс",
-    description: "Корпоративный сайт транспортной компании",
+    description: "Корпоративный сайт поставщика минеральных удобрений",
     url: "https://transagro.bxdemo.ru/",
     casePage: "/cases/transagro",
     image: caseImage4,
