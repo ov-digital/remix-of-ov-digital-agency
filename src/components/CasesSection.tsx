@@ -1,15 +1,15 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import FishingWeekendPreview from "./cases/FishingWeekendPreview";
 import Pacific147Preview from "./cases/Pacific147Preview";
+import IgraShowPreview from "./cases/IgraShowPreview";
 
-  const cases = [
-    {
-      title: "147 Pacific",
-      subtitle: "Интернет-магазин премиальных автомобильных аксессуаров",
+const cases = [
+  {
+    title: "147 Pacific",
+    subtitle: "Интернет-магазин премиальных автомобильных аксессуаров",
     casePage: "/cases/147pacific",
     image: null,
     customPreview: Pacific147Preview,
@@ -21,15 +21,16 @@ import Pacific147Preview from "./cases/Pacific147Preview";
     image: null,
     customPreview: FishingWeekendPreview,
   },
-    {
-      title: "Igra Show",
-      subtitle: "Сайт-визитка концертного агентства Большая игра",
+  {
+    title: "Igra Show",
+    subtitle: "Сайт-визитка концертного агентства Большая игра",
     casePage: "/cases/igra-show",
-    image: caseImage3,
+    image: null,
+    customPreview: IgraShowPreview,
   },
-    {
-      title: "Transagro",
-      subtitle: "Интернет-каталог поставщика минеральных удобрений",
+  {
+    title: "Transagro",
+    subtitle: "Интернет-каталог поставщика минеральных удобрений",
     casePage: "/cases/transagro",
     image: caseImage4,
   },
