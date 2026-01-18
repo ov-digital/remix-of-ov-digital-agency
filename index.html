@@ -9,6 +9,8 @@
     <meta name="description" content="Создаем сайты, интернет-магазины, мобильные приложения, CRM и Telegram-боты. 10+ лет опыта. Работаем с бизнесом и digital-студиями по всей России." />
     <meta name="keywords" content="разработка сайтов, мобильные приложения, CRM, Telegram боты, digital агентство, веб-разработка, 1С-Битрикс, WordPress" />
     <meta name="author" content="OV Digital Agency" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
     
     <!-- Open Graph -->
     <meta property="og:title" content="OV Digital Agency — разработка digital-решений для бизнеса" />
@@ -16,21 +18,59 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ov-digital.ru" />
     <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="OV Digital Agency" />
+    <meta property="og:image" content="/og-image.png" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="OV Digital Agency — разработка digital-решений" />
     <meta name="twitter:description" content="Создаем сайты, мобильные приложения, CRM и Telegram-боты." />
+    <meta name="twitter:image" content="/og-image.png" />
     
     <!-- Canonical -->
     <link rel="canonical" href="https://ov-digital.ru" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     
     <!-- Fonts preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script" crossorigin />
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "OV Digital Agency",
+      "url": "https://ov-digital.ru",
+      "logo": "https://ov-digital.ru/favicon.png",
+      "description": "Создаем сайты, интернет-магазины, мобильные приложения, CRM и Telegram-боты.",
+      "email": "ov.digital.agency@gmail.com",
+      "sameAs": [
+        "https://t.me/ov_digital_agency"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "RU"
+      },
+      "priceRange": "₽₽",
+      "areaServed": "RU"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "OV Digital Agency",
+      "url": "https://ov-digital.ru"
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
