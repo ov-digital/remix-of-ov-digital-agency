@@ -177,7 +177,7 @@ export const ContactsSection = () => {
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <span className="text-muted-foreground">Работаем с бизнесом и digital-студиями по всей России</span>
+                  <span className="text-muted-foreground">Работаем с бизнесом по всей России</span>
                 </div>
               </div>
             </div>

@@ -15,7 +15,7 @@ const Footer = () => {
   const navigation = [
     { href: "/#services", label: "Услуги" },
     { href: "/#technologies", label: "Технологии" },
-    { href: "/#cases", label: "Кейсы" },
+    { href: "/#cases", label: "Портфолио" },
     { href: "/about", label: "О нас" },
     { href: "/#contacts", label: "Контакты" },
   ];

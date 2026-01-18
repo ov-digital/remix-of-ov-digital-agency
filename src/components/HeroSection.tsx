@@ -20,7 +20,7 @@ export const HeroSection = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Создаем сайты, интернет-магазины, корпоративные порталы, мобильные приложения, CRM и Telegram-боты. Работаем с бизнесом и digital-студиями по всей России
+            Создаем сайты, интернет-магазины, корпоративные порталы, мобильные приложения, CRM и Telegram-боты. Работаем с бизнесом по всей России
           </p>
 
           {/* CTA Buttons */}
@@ -32,7 +32,7 @@ export const HeroSection = () => {
               </Button>
             </ContactFormPopup>
             <Button variant="heroOutline" size="lg" asChild>
-              <a href="#cases">Смотреть кейсы</a>
+              <a href="#cases">Смотреть портфолио</a>
             </Button>
           </div>
 

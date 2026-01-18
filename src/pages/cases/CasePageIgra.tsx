@@ -16,7 +16,7 @@ const CasePageIgra = () => {
           <div className="section-container">
             <Link to="/#cases" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6">
               <ArrowLeft className="w-4 h-4" />
-              Назад к кейсам
+              Назад к портфолио
             </Link>
             
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
