@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { CookieBanner } from "@/components/CookieBanner";
 
 // Eager load main page
 import Index from "./pages/Index";
@@ -64,6 +65,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToHash />
         <ScrollToTop />
+        <CookieBanner />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
