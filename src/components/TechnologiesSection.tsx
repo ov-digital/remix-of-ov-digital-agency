@@ -1,4 +1,6 @@
 import bitrixLogo from "@/assets/bitrix-logo.png";
+import modxLogo from "@/assets/modx-logo.png";
+import cscartLogo from "@/assets/cscart-logo.png";
 
 const technologies = [
   // Backend
@@ -32,8 +34,8 @@ const technologies = [
   { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", category: "CMS" },
   { name: "1С-Битрикс", icon: bitrixLogo, category: "CMS" },
   { name: "Drupal", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/drupal/drupal-original.svg", category: "CMS" },
-  { name: "MODX", icon: "https://modx.com/assets/i/logos/v4-icon/icon-color.svg", category: "CMS" },
-  { name: "CS-Cart", icon: "https://www.cs-cart.com/images/cs-cart-logo.svg", category: "CMS" },
+  { name: "MODX", icon: modxLogo, category: "CMS" },
+  { name: "CS-Cart", icon: cscartLogo, category: "CMS" },
   
   // Database
   { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", category: "Database" },
