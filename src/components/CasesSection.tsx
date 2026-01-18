@@ -1,5 +1,6 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import caseImage1 from "@/assets/case-147pacific-preview.jpg";
 import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
@@ -64,6 +65,9 @@ const cases = [
 ];
 
 export const CasesSection = () => {
+  // Show only first 4 cases on homepage
+  const displayedCases = cases.slice(0, 4);
+
   return (
     <section id="cases" className="section-padding bg-card">
       <div className="section-container">
@@ -77,7 +81,7 @@ export const CasesSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {cases.map((caseItem) => (
+          {displayedCases.map((caseItem) => (
             <Link
               key={caseItem.title}
               to={caseItem.casePage}
@@ -94,7 +98,7 @@ export const CasesSection = () => {
                     })()
                   ) : (
                     <img
-                      src={caseItem.image}
+                      src={caseItem.image!}
                       alt={caseItem.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -145,6 +149,16 @@ export const CasesSection = () => {
               </h4>
             </Link>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="text-center mt-10">
+          <Link to="/portfolio">
+            <Button variant="outline" size="lg" className="rounded-full">
+              Все работы
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

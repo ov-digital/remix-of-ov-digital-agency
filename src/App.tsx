@@ -14,6 +14,9 @@ import NotFound from "./pages/NotFound";
 
 // Lazy load other pages for better performance
 const AboutPage = lazy(() => import("./pages/AboutPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogArticlePage = lazy(() => import("./pages/blog/BlogArticlePage"));
+const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 const WebDevelopmentPage = lazy(() => import("./pages/services/WebDevelopmentPage"));
 const WebDesignPage = lazy(() => import("./pages/services/WebDesignPage"));
 const MobileAppsPage = lazy(() => import("./pages/services/MobileAppsPage"));
@@ -70,6 +73,9 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/services/web-development" element={<WebDevelopmentPage />} />
             <Route path="/services/web-design" element={<WebDesignPage />} />
             <Route path="/services/mobile-apps" element={<MobileAppsPage />} />
