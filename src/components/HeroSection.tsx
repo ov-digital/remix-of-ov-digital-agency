@@ -13,36 +13,33 @@ export const HeroSection = () => {
   return (
     <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         {/* Large gradient circle - top right */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-full blur-3xl" />
+        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-primary/30 to-blue-500/30 rounded-full blur-[100px]" />
         
         {/* Medium gradient circle - bottom left */}
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-gradient-to-tr from-purple-500/15 to-primary/15 rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-gradient-to-tr from-purple-500/25 to-primary/25 rounded-full blur-[80px]" />
         
-        {/* Small accent circle - center right */}
-        <div className="absolute top-1/2 right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl" />
+        {/* Small accent circle - center */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-400/15 rounded-full blur-[60px]" />
         
         {/* Grid pattern overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage: `
-              linear-gradient(to right, currentColor 1px, transparent 1px),
-              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+              linear-gradient(to right, #6366f1 1px, transparent 1px),
+              linear-gradient(to bottom, #6366f1 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px'
+            backgroundSize: '50px 50px'
           }}
         />
         
-        {/* Floating decorative shapes */}
-        <div className="absolute top-40 left-10 w-3 h-3 bg-primary/30 rounded-full animate-pulse" />
-        <div className="absolute top-60 right-20 w-2 h-2 bg-blue-500/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-40 left-1/4 w-4 h-4 bg-purple-500/20 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-        
-        {/* Diagonal line accents */}
-        <div className="absolute top-20 left-1/3 w-24 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent rotate-45" />
-        <div className="absolute bottom-32 right-1/3 w-32 h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent -rotate-45" />
+        {/* Floating decorative dots */}
+        <div className="absolute top-32 left-20 w-4 h-4 bg-primary/40 rounded-full animate-pulse" />
+        <div className="absolute top-48 right-32 w-3 h-3 bg-blue-500/50 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-1/4 w-5 h-5 bg-purple-500/30 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-primary/50 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
       </div>
 
       <div className="section-container relative">
