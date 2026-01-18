@@ -2,68 +2,38 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
-import bitrixLogo from "@/assets/bitrix-logo.svg";
 import FishingWeekendPreview from "@/components/cases/FishingWeekendPreview";
 import Pacific147Preview from "@/components/cases/Pacific147Preview";
 
 const cases = [
   {
-    title: "147pacific.com",
-    subtitle: "Интернет-магазин на headless eCommerce",
-    description: "Интернет-магазин на headless eCommerce, кастомные интеграции, оплата и логистика",
-    url: "https://147pacific.com/",
+    title: "147 Pacific",
+    subtitle: "Интернет-магазин диджейского оборудования",
     casePage: "/cases/147pacific",
     image: null,
     customPreview: Pacific147Preview,
-    bgColor: "bg-gradient-to-br from-cyan-400 to-blue-500",
-    techIcons: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    ],
   },
   {
     title: "Fishing Weekend",
     subtitle: "Интернет-магазин рыболовных товаров",
-    description: "Корпоративный сайт с каталогом и 1С интеграцией",
-    url: "https://fishing-weekend.ru/",
     casePage: "/cases/fishing-weekend",
     image: null,
     customPreview: FishingWeekendPreview,
-    bgColor: "bg-gradient-to-br from-sky-400 to-blue-600",
-    techIcons: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-      bitrixLogo,
-    ],
   },
   {
-    title: "Igra.show",
+    title: "Igra Show",
     subtitle: "Промо-сайт развлекательного шоу",
-    description: "Промо-сайт с кастомным дизайном",
-    url: "https://igra.show",
     casePage: "/cases/igra-show",
     image: caseImage3,
-    bgColor: "bg-gradient-to-br from-orange-400 to-amber-500",
-    techIcons: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg",
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-    ],
   },
   {
     title: "Транс Агро",
-    subtitle: "Каталог минеральных удобрений",
-    description: "Корпоративный сайт поставщика минеральных удобрений",
-    url: "https://transagro.bxdemo.ru/",
+    subtitle: "Корпоративный сайт дистрибьютора удобрений",
     casePage: "/cases/transagro",
     image: caseImage4,
-    bgColor: "bg-gradient-to-br from-green-500 to-lime-600",
-    techIcons: [
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-      bitrixLogo,
-    ],
   },
 ];
 
@@ -131,31 +101,6 @@ const PortfolioPage = () => {
                       </div>
                     </div>
                     
-                    {/* Bottom bar with URL and tech icons */}
-                    <div className="bg-card p-4 flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                        <span className="truncate max-w-[150px] md:max-w-[200px]">
-                          {caseItem.url.replace('https://', '').replace('/', '')}
-                        </span>
-                        <ExternalLink className="w-4 h-4 flex-shrink-0" />
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        {caseItem.techIcons.map((icon, index) => (
-                          <div 
-                            key={index} 
-                            className="w-7 h-7 bg-muted rounded-full p-1.5 flex items-center justify-center"
-                          >
-                            <img 
-                              src={icon} 
-                              alt="Technology" 
-                              className="w-full h-full object-contain"
-                              loading="lazy"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                   
                   {/* Title below card */}
