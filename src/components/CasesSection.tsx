@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import caseImage1 from "@/assets/case-147pacific-preview.jpg";
-import caseImage2 from "@/assets/case-fishing-preview.jpg";
+import caseImage2 from "@/assets/case-fishing-desktop.jpg";
 import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import bitrixLogo from "@/assets/bitrix-logo.svg";

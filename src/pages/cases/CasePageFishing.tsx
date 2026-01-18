@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-fishing-preview.jpg";
+import caseImageDesktop from "@/assets/case-fishing-desktop.jpg";
+import caseImageMobile from "@/assets/case-fishing-mobile.jpg";
 
 const CasePageFishing = () => {
   return (
@@ -41,10 +42,17 @@ const CasePageFishing = () => {
               </div>
               
               <div className="rounded-xl overflow-hidden shadow-2xl">
+                {/* Desktop screenshot */}
                 <img 
-                  src={caseImage} 
-                  alt="Fishing Weekend" 
-                  className="w-full h-auto"
+                  src={caseImageDesktop} 
+                  alt="Fishing Weekend - главная страница" 
+                  className="w-full h-auto hidden md:block"
+                />
+                {/* Mobile screenshot */}
+                <img 
+                  src={caseImageMobile} 
+                  alt="Fishing Weekend - мобильная версия" 
+                  className="w-full h-auto md:hidden"
                 />
               </div>
             </div>
