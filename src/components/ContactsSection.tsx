@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, Phone, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, Send, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const ContactsSection = () => {
@@ -16,12 +16,21 @@ export const ContactsSection = () => {
   });
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const lastSubmitTime = useRef<number>(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!consent) {
       toast.error("Необходимо дать согласие на обработку персональных данных");
+      return;
+    }
+
+    // Защита от повторных отправок (минимум 30 секунд между заявками)
+    const now = Date.now();
+    if (now - lastSubmitTime.current < 30000) {
+      toast.error("Подождите немного перед повторной отправкой");
       return;
     }
     
@@ -34,24 +43,28 @@ export const ContactsSection = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          message: formData.message.trim(),
           consent: "Да, пользователь дал согласие на обработку персональных данных",
-          _subject: `Новая заявка от ${formData.name} - OV Digital Agency`,
+          _subject: `Новая заявка от ${formData.name.trim()} - OV Digital Agency`,
         }),
       });
 
       if (response.ok) {
+        lastSubmitTime.current = now;
+        setIsSuccess(true);
         toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
         setFormData({ name: "", email: "", phone: "", message: "" });
         setConsent(false);
+        // Сбросить состояние успеха через 5 секунд
+        setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        toast.error("Ошибка отправки. Попробуйте написать нам в Telegram.");
+        toast.error("Не удалось отправить заявку. Попробуйте написать нам в Telegram.");
       }
     } catch (error) {
-      toast.error("Ошибка отправки. Попробуйте написать нам в Telegram.");
+      toast.error("Ошибка соединения. Проверьте интернет или напишите нам в Telegram.");
     } finally {
       setIsSubmitting(false);
     }
@@ -142,9 +155,28 @@ export const ContactsSection = () => {
                 и даёте согласие на обработку ваших персональных данных в целях связи и обработки вашей заявки.
               </p>
               
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting || !consent}>
-                {isSubmitting ? "Отправка..." : "Отправить заявку"}
-                <Send className="w-4 h-4 ml-2" />
+              <Button 
+                type="submit" 
+                size="lg" 
+                className={`w-full ${isSuccess ? 'bg-green-600 hover:bg-green-700' : ''}`} 
+                disabled={isSubmitting || !consent}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Отправка...
+                  </>
+                ) : isSuccess ? (
+                  <>
+                    <CheckCircle className="w-4 h-4 mr-2" />
+                    Отправлено!
+                  </>
+                ) : (
+                  <>
+                    Отправить заявку
+                    <Send className="w-4 h-4 ml-2" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
