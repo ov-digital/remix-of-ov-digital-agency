@@ -6,11 +6,11 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { href: "#services", label: "Услуги" },
-  { href: "#technologies", label: "Технологии" },
-  { href: "#cases", label: "Кейсы" },
-  { href: "#blog", label: "Блог" },
-  { href: "#contacts", label: "Контакты" },
+  { href: "#services", label: "Услуги", isHash: true },
+  { href: "#technologies", label: "Технологии", isHash: true },
+  { href: "#cases", label: "Кейсы", isHash: true },
+  { href: "/about", label: "О нас", isHash: false },
+  { href: "#contacts", label: "Контакты", isHash: true },
 ];
 
 export const Header = () => {
@@ -33,25 +33,25 @@ export const Header = () => {
             <img src={logo} alt="OV Digital Agency" className="h-12 w-auto" />
           </Link>
 
-          {/* Desktop Navigation */}
+{/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              isHomePage ? (
+              link.isHash ? (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={isHomePage ? link.href : "/" + link.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </a>
               ) : (
-                <a
+                <Link
                   key={link.href}
-                  href={"/" + link.href}
+                  to={link.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               )
             ))}
           </nav>
@@ -73,29 +73,29 @@ export const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+{/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border">
+          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                isHomePage ? (
+                link.isHash ? (
                   <a
                     key={link.href}
-                    href={link.href}
+                    href={isHomePage ? link.href : "/" + link.href}
                     className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
                   </a>
                 ) : (
-                  <a
+                  <Link
                     key={link.href}
-                    href={"/" + link.href}
+                    to={link.href}
                     className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               ))}
               <ContactFormPopup>
