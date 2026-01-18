@@ -6,7 +6,7 @@ const FishingWeekendPreview = () => {
       <img 
         src={previewImage} 
         alt="Fishing Weekend - интернет-магазин рыболовных товаров"
-        className="w-full h-full object-cover object-center"
+        className="w-full h-full object-cover object-top"
       />
     </div>
   );

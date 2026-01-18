@@ -1,11 +1,11 @@
 import { ExternalLink, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import caseImage1 from "@/assets/case-147pacific-preview.jpg";
 import caseImage3 from "@/assets/case-igra-preview.jpg";
 import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import bitrixLogo from "@/assets/bitrix-logo.svg";
 import FishingWeekendPreview from "./cases/FishingWeekendPreview";
+import Pacific147Preview from "./cases/Pacific147Preview";
 
 const cases = [
   {
@@ -14,7 +14,8 @@ const cases = [
     description: "Интернет-магазин на headless eCommerce, кастомные интеграции, оплата и логистика",
     url: "https://147pacific.com/",
     casePage: "/cases/147pacific",
-    image: caseImage1,
+    image: null,
+    customPreview: Pacific147Preview,
     bgColor: "bg-gradient-to-br from-cyan-400 to-blue-500",
     techIcons: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",

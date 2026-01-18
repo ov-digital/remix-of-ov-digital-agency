@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-147pacific-preview.jpg";
+import caseHeroImage from "@/assets/case-147pacific-hero.jpg";
+import casePagesImage from "@/assets/case-147pacific-pages.jpg";
 
 const CasePage147Pacific = () => {
   return (
@@ -42,9 +43,9 @@ const CasePage147Pacific = () => {
               
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <img 
-                  src={caseImage} 
-                  alt="147pacific.com" 
-                  className="w-full h-auto"
+                  src={caseHeroImage} 
+                  alt="147pacific.com - главная страница" 
+                  className="w-full h-auto object-cover object-top"
                 />
               </div>
             </div>
@@ -76,8 +77,22 @@ const CasePage147Pacific = () => {
           </div>
         </section>
 
-        {/* What Was Done */}
+        {/* Visual Showcase */}
         <section className="section-padding bg-card">
+          <div className="section-container">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">Экраны проекта</h2>
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={casePagesImage} 
+                alt="147pacific.com - страницы сайта" 
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* What Was Done */}
+        <section className="section-padding">
           <div className="section-container">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Что было сделано</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -92,7 +107,7 @@ const CasePage147Pacific = () => {
                 "SEO-оптимизация",
                 "Административная панель",
               ].map((item, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 bg-background rounded-lg">
+                <div key={index} className="flex items-start gap-3 p-4 bg-card rounded-lg">
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
@@ -102,7 +117,7 @@ const CasePage147Pacific = () => {
         </section>
 
         {/* Technologies */}
-        <section className="section-padding">
+        <section className="section-padding bg-card">
           <div className="section-container">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Технологии</h2>
             <div className="flex flex-wrap gap-3">
