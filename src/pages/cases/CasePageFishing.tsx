@@ -53,6 +53,8 @@ const CasePageFishing = () => {
                     src={casePreview} 
                     alt="Fishing Weekend - превью проекта" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -94,6 +96,8 @@ const CasePageFishing = () => {
                 src={casePages} 
                 alt="Fishing Weekend - страницы сайта" 
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

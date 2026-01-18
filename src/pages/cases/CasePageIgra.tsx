@@ -50,8 +50,10 @@ const CasePageIgra = () => {
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <img 
                   src={caseImage} 
-                  alt="Igra.show" 
+                  alt="Igra Show - превью" 
                   className="w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -116,15 +118,19 @@ const CasePageIgra = () => {
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <img 
                   src={caseHero} 
-                  alt="Igra.show - главная страница" 
+                  alt="Igra Show - главная страница" 
                   className="w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <img 
                   src={casePages} 
-                  alt="Igra.show - страницы сайта" 
+                  alt="Igra Show - страницы сайта" 
                   className="w-full h-auto"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

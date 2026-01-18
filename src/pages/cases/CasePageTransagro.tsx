@@ -53,6 +53,8 @@ const CasePageTransagro = () => {
                     src={casePreview} 
                     alt="TransAgro - превью проекта" 
                     className="w-full h-auto"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -94,6 +96,8 @@ const CasePageTransagro = () => {
                 src={casePages} 
                 alt="TransAgro - страницы сайта" 
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
