@@ -23,17 +23,17 @@ const CasePageTransagro = () => {
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    1С-Битрикс
+                    WordPress
                   </span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                   Transagro
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Корпоративный сайт транспортной компании с калькулятором стоимости и личным кабинетом
+                  Каталог запасных частей для сельскохозяйственной техники с удобным поиском и системой заказов
                 </p>
                 <Button asChild size="lg">
-                  <a href="https://transagro.bxdemo.ru/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://transagro.ru" target="_blank" rel="noopener noreferrer">
                     Посетить сайт
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </a>
@@ -59,17 +59,18 @@ const CasePageTransagro = () => {
               <div>
                 <h3 className="text-xl font-semibold mb-4">Задача</h3>
                 <p className="text-muted-foreground mb-6">
-                  Разработать современный корпоративный сайт для транспортной компании с 
-                  калькулятором стоимости перевозки, системой онлайн-заявок и личным кабинетом 
-                  для клиентов с отслеживанием грузов.
+                  Создать удобный онлайн-каталог запасных частей для сельскохозяйственной техники 
+                  (ROPA, HOLMER, John Deere, Amazone и др.) с возможностью быстрого поиска нужных 
+                  деталей и оформления заказа. Обеспечить круглосуточный доступ к каталогу для 
+                  срочных ремонтов.
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-4">Решение</h3>
                 <p className="text-muted-foreground">
-                  Создали функциональный сайт на 1С-Битрикс с интерактивным калькулятором 
-                  стоимости, формами заявок и личным кабинетом. Интегрировали с внутренними 
-                  системами компании для автоматизации обработки заказов.
+                  Разработали каталог на WordPress с расширенной системой фильтрации по брендам, 
+                  категориям и артикулам. Реализовали раздел распродаж, прайс-листы и удобные 
+                  формы заказа. Оптимизировали для быстрой загрузки даже при большом ассортименте.
                 </p>
               </div>
             </div>
@@ -82,15 +83,15 @@ const CasePageTransagro = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Что было сделано</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "Разработка на 1С-Битрикс",
-                "Калькулятор стоимости перевозки",
-                "Личный кабинет клиента",
-                "Система онлайн-заявок",
-                "Интеграция с внутренними системами",
+                "Разработка на WordPress",
+                "Каталог с 10 000+ позиций",
+                "Умный поиск по артикулам",
+                "Фильтрация по брендам техники",
+                "Раздел распродаж и акций",
+                "Скачиваемые прайс-листы",
+                "Формы заказа и обратной связи",
                 "Адаптивный дизайн",
                 "SEO-оптимизация",
-                "Карта филиалов",
-                "Блог и новости компании",
               ].map((item, index) => (
                 <div key={index} className="flex items-start gap-3 p-4 bg-background rounded-lg">
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -106,7 +107,7 @@ const CasePageTransagro = () => {
           <div className="section-container">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Технологии</h2>
             <div className="flex flex-wrap gap-3">
-              {["1С-Битрикс", "PHP", "MySQL", "JavaScript", "REST API", "Яндекс.Карты"].map((tech) => (
+              {["WordPress", "PHP", "MySQL", "JavaScript", "WooCommerce", "Elementor"].map((tech) => (
                 <span 
                   key={tech}
                   className="px-4 py-2 bg-secondary rounded-lg font-medium"
@@ -125,7 +126,7 @@ const CasePageTransagro = () => {
               Нужен похожий проект?
             </h2>
             <p className="text-primary-foreground/80 mb-6 max-w-xl mx-auto">
-              Разработаем корпоративный сайт с калькуляторами, личным кабинетом и интеграциями
+              Разработаем каталог товаров или запчастей с удобным поиском и системой заказов
             </p>
             <Button variant="secondary" size="lg" asChild>
               <Link to="/#contacts">Обсудить проект</Link>
