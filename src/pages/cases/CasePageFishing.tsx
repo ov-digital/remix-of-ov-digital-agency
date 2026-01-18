@@ -5,10 +5,15 @@ import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import casePreview from "@/assets/case-fishing-preview.jpg";
 import casePages from "@/assets/case-fishing-pages.jpg";
+import { PageMeta } from "@/components/PageMeta";
 
 const CasePageFishing = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta 
+        title="Fishing Weekend — кейс разработки интернет-магазина" 
+        description="Разработка интернет-магазина рыболовных товаров на 1С-Битрикс с интеграцией 1С."
+      />
       <Header />
       
       <main className="flex-1 pt-20">

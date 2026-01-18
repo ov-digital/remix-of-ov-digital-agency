@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ContactFormPopup } from "@/components/ContactFormPopup";
+import { PageMeta } from "@/components/PageMeta";
 
 interface ServicePageLayoutProps {
   title: string;
@@ -33,6 +34,10 @@ export const ServicePageLayout = ({
 }: ServicePageLayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title={title} 
+        description={`${subtitle}. ${description.slice(0, 100)}...`}
+      />
       <Header />
       <main>
         {/* Hero Section */}

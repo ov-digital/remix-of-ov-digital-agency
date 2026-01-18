@@ -5,10 +5,15 @@ import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import casePreview from "@/assets/case-transagro-desktop.jpg";
 import casePages from "@/assets/case-transagro-mobile.jpg";
+import { PageMeta } from "@/components/PageMeta";
 
 const CasePageTransagro = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta 
+        title="TransAgro — кейс разработки сайта" 
+        description="Разработка корпоративного сайта для крупного поставщика минеральных удобрений на 1С-Битрикс."
+      />
       <Header />
       
       <main className="flex-1 pt-20">
