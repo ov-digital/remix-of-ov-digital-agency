@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import caseImage from "@/assets/case-igra-preview.jpg";
+import caseHero from "@/assets/case-igra-hero.jpg";
+import casePages from "@/assets/case-igra-pages.jpg";
 
 const CasePageIgra = () => {
   return (
@@ -101,8 +103,31 @@ const CasePageIgra = () => {
           </div>
         </section>
 
-        {/* Technologies */}
+        {/* Visual Showcase */}
         <section className="section-padding">
+          <div className="section-container">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">Визуальные решения</h2>
+            <div className="space-y-8">
+              <div className="rounded-xl overflow-hidden shadow-2xl">
+                <img 
+                  src={caseHero} 
+                  alt="Igra.show - главная страница" 
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-2xl">
+                <img 
+                  src={casePages} 
+                  alt="Igra.show - страницы сайта" 
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Technologies */}
+        <section className="section-padding bg-card">
           <div className="section-container">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Технологии</h2>
             <div className="flex flex-wrap gap-3">
