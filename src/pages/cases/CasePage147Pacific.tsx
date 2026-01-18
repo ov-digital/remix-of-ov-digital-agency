@@ -5,10 +5,15 @@ import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import caseHeroImage from "@/assets/case-147pacific-hero.jpg";
 import casePagesImage from "@/assets/case-147pacific-pages.jpg";
+import { PageMeta } from "@/components/PageMeta";
 
 const CasePage147Pacific = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta 
+        title="147 Pacific — кейс разработки интернет-магазина" 
+        description="Разработка интернет-магазина премиальных автомобильных аксессуаров на Python/Django + Saleor."
+      />
       <Header />
       
       <main className="flex-1 pt-20">

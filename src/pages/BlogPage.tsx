@@ -4,10 +4,15 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
+import { PageMeta } from "@/components/PageMeta";
 
 const BlogPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Блог" 
+        description="Полезные материалы о digital-разработке, маркетинге и автоматизации бизнес-процессов от OV Digital Agency."
+      />
       <Header />
       <main>
         {/* Hero Section */}

@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
+import { PageMeta } from "@/components/PageMeta";
 
 const PrivacyPolicyPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Политика обработки персональных данных" 
+        description="Политика обработки персональных данных OV Digital Agency. Информация о сборе, хранении и использовании данных пользователей."
+      />
       <Header />
       
       <main className="pt-24 pb-16">

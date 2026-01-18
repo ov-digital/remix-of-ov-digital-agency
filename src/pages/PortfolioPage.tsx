@@ -7,6 +7,7 @@ import FishingWeekendPreview from "@/components/cases/FishingWeekendPreview";
 import Pacific147Preview from "@/components/cases/Pacific147Preview";
 import IgraShowPreview from "@/components/cases/IgraShowPreview";
 import TransAgroPreview from "@/components/cases/TransAgroPreview";
+import { PageMeta } from "@/components/PageMeta";
 
 const cases = [
   {
@@ -42,6 +43,10 @@ const cases = [
 const PortfolioPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="Портфолио" 
+        description="Примеры реализованных проектов OV Digital Agency: интернет-магазины, корпоративные сайты, веб-приложения."
+      />
       <Header />
       <main>
         {/* Hero Section */}

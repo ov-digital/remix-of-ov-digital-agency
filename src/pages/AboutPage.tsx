@@ -4,6 +4,7 @@ import { ContactFormPopup } from "@/components/ContactFormPopup";
 import { Button } from "@/components/ui/button";
 import { Users, Heart, Lightbulb, Target, CheckCircle2, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { PageMeta } from "@/components/PageMeta";
 
 const AboutPage = () => {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -13,6 +14,10 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title="О компании" 
+        description="OV Digital Agency — команда профессионалов с 10+ летним опытом. Создаём сайты, мобильные приложения и CRM-системы."
+      />
       <Header />
       
       <main className="pt-20">

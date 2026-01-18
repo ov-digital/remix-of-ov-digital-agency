@@ -34,8 +34,9 @@ const BlogArticlePage = () => {
 
   const renderContent = (content: string) => {
     return content.split('\n').map((line, i) => {
+      // Skip H1 in content since we already have H1 in the header
       if (line.startsWith('# ')) {
-        return <h1 key={i} className="text-2xl md:text-3xl font-bold mt-8 mb-4">{line.slice(2)}</h1>;
+        return null;
       } else if (line.startsWith('## ')) {
         return <h2 key={i} className="text-xl md:text-2xl font-semibold mt-8 mb-4">{line.slice(3)}</h2>;
       } else if (line.startsWith('### ')) {

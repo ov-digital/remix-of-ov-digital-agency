@@ -6,10 +6,15 @@ import { Link } from "react-router-dom";
 import caseImage from "@/assets/case-igra-preview.jpg";
 import caseHero from "@/assets/case-igra-hero.jpg";
 import casePages from "@/assets/case-igra-pages.jpg";
+import { PageMeta } from "@/components/PageMeta";
 
 const CasePageIgra = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta 
+        title="Igra Show — кейс разработки сайта" 
+        description="Разработка сайта-портфолио концертного агентства с афишей мероприятий и формой букинга."
+      />
       <Header />
       
       <main className="flex-1 pt-20">
