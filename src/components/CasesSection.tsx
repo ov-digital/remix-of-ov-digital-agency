@@ -1,12 +1,19 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import FishingWeekendPreview from "./cases/FishingWeekendPreview";
 import Pacific147Preview from "./cases/Pacific147Preview";
 import IgraShowPreview from "./cases/IgraShowPreview";
+import TransAgroPreview from "./cases/TransAgroPreview";
 
 const cases = [
+  {
+    title: "TransAgro",
+    subtitle: "Интернет-каталог поставщика минеральных удобрений",
+    casePage: "/cases/transagro",
+    image: null,
+    customPreview: TransAgroPreview,
+  },
   {
     title: "147 Pacific",
     subtitle: "Интернет-магазин премиальных автомобильных аксессуаров",
@@ -27,12 +34,6 @@ const cases = [
     casePage: "/cases/igra-show",
     image: null,
     customPreview: IgraShowPreview,
-  },
-  {
-    title: "Transagro",
-    subtitle: "Интернет-каталог поставщика минеральных удобрений",
-    casePage: "/cases/transagro",
-    image: caseImage4,
   },
 ];
 

@@ -3,12 +3,19 @@ import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import caseImage4 from "@/assets/case-transagro-preview.jpg";
 import FishingWeekendPreview from "@/components/cases/FishingWeekendPreview";
 import Pacific147Preview from "@/components/cases/Pacific147Preview";
 import IgraShowPreview from "@/components/cases/IgraShowPreview";
+import TransAgroPreview from "@/components/cases/TransAgroPreview";
 
 const cases = [
+  {
+    title: "TransAgro",
+    subtitle: "Интернет-каталог поставщика минеральных удобрений",
+    casePage: "/cases/transagro",
+    image: null,
+    customPreview: TransAgroPreview,
+  },
   {
     title: "147 Pacific",
     subtitle: "Интернет-магазин премиальных автомобильных аксессуаров",
@@ -29,12 +36,6 @@ const cases = [
     casePage: "/cases/igra-show",
     image: null,
     customPreview: IgraShowPreview,
-  },
-  {
-    title: "Transagro",
-    subtitle: "Интернет-каталог поставщика минеральных удобрений",
-    casePage: "/cases/transagro",
-    image: caseImage4,
   },
 ];
 
