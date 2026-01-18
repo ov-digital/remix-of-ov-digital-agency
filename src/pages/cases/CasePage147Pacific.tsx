@@ -51,6 +51,8 @@ const CasePage147Pacific = () => {
                   src={caseHeroImage} 
                   alt="147pacific.com - главная страница" 
                   className="w-full h-auto object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -91,6 +93,8 @@ const CasePage147Pacific = () => {
                 src={casePagesImage} 
                 alt="147pacific.com - страницы сайта" 
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

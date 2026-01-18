@@ -96,6 +96,8 @@ const BlogArticlePage = () => {
                 src={post.image} 
                 alt={post.title}
                 className="w-full aspect-video object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -92,6 +92,8 @@ export const TechnologiesSection = () => {
                   src={tech.icon} 
                   alt={tech.name}
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <span className="text-xs md:text-sm font-medium text-center text-muted-foreground group-hover:text-foreground transition-colors">

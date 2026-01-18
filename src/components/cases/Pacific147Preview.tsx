@@ -7,6 +7,8 @@ const Pacific147Preview = () => {
         src={previewImage} 
         alt="147Pacific - интернет-магазин автоаксессуаров"
         className="w-full h-full object-cover object-top"
+        loading="lazy"
+        decoding="async"
       />
     </div>
   );
