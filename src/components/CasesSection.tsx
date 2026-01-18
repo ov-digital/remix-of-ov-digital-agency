@@ -69,10 +69,10 @@ export const CasesSection = () => {
       <div className="section-container">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-            Кейсы
+            Портфолио
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Примеры реализованных проектов для бизнеса и digital-студий
+            Примеры реализованных проектов для бизнеса
           </p>
         </div>
 

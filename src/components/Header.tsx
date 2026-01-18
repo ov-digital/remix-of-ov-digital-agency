@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 const navLinks = [
   { href: "#services", label: "Услуги", isHash: true },
   { href: "#technologies", label: "Технологии", isHash: true },
-  { href: "#cases", label: "Кейсы", isHash: true },
+  { href: "#cases", label: "Портфолио", isHash: true },
   { href: "/about", label: "О нас", isHash: false },
   { href: "#contacts", label: "Контакты", isHash: true },
 ];
