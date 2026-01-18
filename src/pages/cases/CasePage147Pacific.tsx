@@ -28,7 +28,7 @@ const CasePage147Pacific = () => {
                   </span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  147pacific.com
+                  147 Pacific
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
                   Интернет-магазин премиальных автомобильных аксессуаров: модульные каркасы безопасности, рейлинги и защита для пикапов и внедорожников. Made in USA.
