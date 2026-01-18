@@ -1,32 +1,44 @@
 const technologies = [
-  {
-    category: "Backend",
-    items: ["Python", "Django", "FastAPI", "Saleor", "PHP", "Laravel", "Yii2", "Symfony", "Node.js", "Nest.js", "Golang"],
-  },
-  {
-    category: "Frontend",
-    items: ["HTML", "CSS", "JavaScript", "Vue.js", "Nuxt.js", "React.js", "Next.js", "Angular"],
-  },
-  {
-    category: "Mobile",
-    items: ["React Native", "Flutter"],
-  },
-  {
-    category: "CMS / E-commerce",
-    items: ["1C-Битрикс", "WordPress", "OpenCart", "Joomla", "MODX", "CS-Cart", "Saleor"],
-  },
-  {
-    category: "Telegram / Web3",
-    items: ["Telegram Bots", "Telegram Mini Apps", "Func", "Tact", "Tolk"],
-  },
-  {
-    category: "CRM",
-    items: ["Bitrix24", "AmoCRM"],
-  },
-  {
-    category: "AI / ML",
-    items: ["AI-проекты", "Чат-боты", "Аналитика", "Автоматизация"],
-  },
+  // Backend
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", category: "Backend" },
+  { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg", category: "Backend" },
+  { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg", category: "Backend" },
+  { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", category: "Backend" },
+  { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", category: "Backend" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", category: "Backend" },
+  { name: "Nest.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg", category: "Backend" },
+  { name: "Golang", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg", category: "Backend" },
+  
+  // Frontend
+  { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", category: "Frontend" },
+  { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", category: "Frontend" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", category: "Frontend" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", category: "Frontend" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", category: "Frontend" },
+  { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg", category: "Frontend" },
+  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", category: "Frontend" },
+  { name: "Nuxt.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg", category: "Frontend" },
+  { name: "Angular", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", category: "Frontend" },
+  
+  // Mobile
+  { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", category: "Mobile" },
+  { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", category: "Mobile" },
+  
+  // CMS
+  { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg", category: "CMS" },
+  { name: "1С-Битрикс", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/1C_Company_logo.svg/120px-1C_Company_logo.svg.png", category: "CMS" },
+  
+  // Database
+  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", category: "Database" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", category: "Database" },
+  { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", category: "Database" },
+  { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", category: "Database" },
+  
+  // DevOps
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", category: "DevOps" },
+  { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg", category: "DevOps" },
+  { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", category: "DevOps" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", category: "DevOps" },
 ];
 
 export const TechnologiesSection = () => {
@@ -42,20 +54,22 @@ export const TechnologiesSection = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 md:gap-8">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4 md:gap-6">
           {technologies.map((tech) => (
-            <div key={tech.category} className="bg-background rounded-xl p-6 card-shadow">
-              <h3 className="font-semibold text-lg mb-4 text-primary">{tech.category}</h3>
-              <div className="flex flex-wrap gap-2">
-                {tech.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-3 py-1.5 bg-secondary text-secondary-foreground rounded-md text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
+            <div 
+              key={tech.name} 
+              className="group flex flex-col items-center gap-2 p-3 md:p-4 bg-background rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                <img 
+                  src={tech.icon} 
+                  alt={tech.name}
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
+              <span className="text-xs md:text-sm font-medium text-center text-muted-foreground group-hover:text-foreground transition-colors">
+                {tech.name}
+              </span>
             </div>
           ))}
         </div>
