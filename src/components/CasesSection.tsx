@@ -22,14 +22,14 @@ import Pacific147Preview from "./cases/Pacific147Preview";
     customPreview: FishingWeekendPreview,
   },
     {
-      title: "Большая игра",
-      subtitle: "Концертное агентство",
+      title: "Igra Show",
+      subtitle: "Сайт-визитка концертного агентства Большая игра",
     casePage: "/cases/igra-show",
     image: caseImage3,
   },
     {
-      title: "Транс Агро",
-      subtitle: "Корпоративный сайт поставщика минеральных удобрений",
+      title: "Transagro",
+      subtitle: "Интернет-каталог поставщика минеральных удобрений",
     casePage: "/cases/transagro",
     image: caseImage4,
   },
