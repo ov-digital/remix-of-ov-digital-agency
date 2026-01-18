@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-transagro-preview.jpg";
+import casePreview from "@/assets/case-transagro-desktop.jpg";
+import casePages from "@/assets/case-transagro-mobile.jpg";
 
 const CasePageTransagro = () => {
   return (
@@ -40,12 +41,15 @@ const CasePageTransagro = () => {
                 </Button>
               </div>
               
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src={caseImage} 
-                  alt="Transagro" 
-                  className="w-full h-auto"
-                />
+              {/* Preview Image */}
+              <div className="relative">
+                <div className="rounded-2xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={casePreview} 
+                    alt="TransAgro - превью проекта" 
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -72,6 +76,20 @@ const CasePageTransagro = () => {
                   и информацию о собственных формулах NPKS/NPS.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pages Showcase */}
+        <section className="section-padding bg-[#1e3a5f]">
+          <div className="section-container">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white">Страницы проекта</h2>
+            <div className="rounded-2xl overflow-hidden">
+              <img 
+                src={casePages} 
+                alt="TransAgro - страницы сайта" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </section>
