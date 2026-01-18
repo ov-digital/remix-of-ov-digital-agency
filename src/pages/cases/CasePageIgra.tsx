@@ -29,7 +29,7 @@ const CasePageIgra = () => {
                   </span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Igra.show
+                  Igra Show
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
                   Сайт-портфолио концертного агентства с 20-летним опытом организации туров и шоу по России. Более 765 проведённых мероприятий.
