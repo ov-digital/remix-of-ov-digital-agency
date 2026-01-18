@@ -99,10 +99,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-background/10">
-        <div className="text-sm text-background/60 text-center md:text-left">
+        <div className="pt-8 border-t border-background/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="text-sm text-background/60 text-center md:text-left">
             © {currentYear} OV Digital Agency. Все права защищены.
           </div>
+          <Link
+            to="/privacy-policy"
+            className="text-sm text-background/60 hover:text-background transition-colors text-center md:text-right"
+          >
+            Политика обработки персональных данных
+          </Link>
         </div>
       </div>
     </footer>
