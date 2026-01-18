@@ -1,9 +1,10 @@
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage1 from "@/assets/case-147pacific.jpg";
-import caseImage2 from "@/assets/case-fishing.jpg";
-import caseImage3 from "@/assets/case-igra.jpg";
-import caseImage4 from "@/assets/case-transagro.jpg";
+import caseImage1 from "@/assets/case-147pacific-preview.jpg";
+import caseImage2 from "@/assets/case-fishing-preview.jpg";
+import caseImage3 from "@/assets/case-igra-preview.jpg";
+import caseImage4 from "@/assets/case-transagro-preview.jpg";
+import bitrixLogo from "@/assets/bitrix-logo.svg";
 
 const cases = [
   {
@@ -30,7 +31,7 @@ const cases = [
     bgColor: "bg-gradient-to-br from-green-400 to-emerald-600",
     techIcons: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/1C_Company_logo.svg/200px-1C_Company_logo.svg.png",
+      bitrixLogo,
     ],
   },
   {
@@ -56,7 +57,7 @@ const cases = [
     bgColor: "bg-gradient-to-br from-green-500 to-lime-600",
     techIcons: [
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/1C_Company_logo.svg/200px-1C_Company_logo.svg.png",
+      bitrixLogo,
     ],
   },
 ];
@@ -81,30 +82,31 @@ export const CasesSection = () => {
               to={caseItem.casePage}
               className="group block"
             >
-              {/* Card with colored background */}
-              <div className={`${caseItem.bgColor} rounded-2xl p-4 md:p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}>
-                {/* Logo/Title at top */}
-                <div className="mb-4">
-                  <h3 className="text-white font-bold text-lg md:text-xl drop-shadow-md">
-                    {caseItem.title}
-                  </h3>
-                </div>
-                
-                {/* Screenshot mockup */}
-                <div className="relative">
-                  <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
-                    <img
-                      src={caseItem.image}
-                      alt={caseItem.title}
-                      className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
+              {/* Card with image preview */}
+              <div className="rounded-2xl overflow-hidden relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                {/* Full preview image */}
+                <div className="relative aspect-[16/9]">
+                  <img
+                    src={caseItem.image}
+                    alt={caseItem.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  {/* Title overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                    <h3 className="text-white font-bold text-lg md:text-xl drop-shadow-md">
+                      {caseItem.title}
+                    </h3>
                   </div>
                 </div>
                 
                 {/* Bottom bar with URL and tech icons */}
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-white/90 text-sm">
+                <div className="bg-card p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
                     <span className="truncate max-w-[150px] md:max-w-[200px]">
                       {caseItem.url.replace('https://', '').replace('/', '')}
                     </span>
@@ -115,7 +117,7 @@ export const CasesSection = () => {
                     {caseItem.techIcons.map((icon, index) => (
                       <div 
                         key={index} 
-                        className="w-7 h-7 bg-white rounded-full p-1.5 shadow-md flex items-center justify-center"
+                        className="w-7 h-7 bg-muted rounded-full p-1.5 flex items-center justify-center"
                       >
                         <img 
                           src={icon} 

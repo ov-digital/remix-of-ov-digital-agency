@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-transagro.jpg";
+import caseImage from "@/assets/case-transagro-preview.jpg";
 
 const CasePageTransagro = () => {
   return (
