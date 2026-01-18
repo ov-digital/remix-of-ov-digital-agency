@@ -5,6 +5,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import WebDevelopmentPage from "./pages/services/WebDevelopmentPage";
+import WebDesignPage from "./pages/services/WebDesignPage";
+import MobileAppsPage from "./pages/services/MobileAppsPage";
+import SeoPage from "./pages/services/SeoPage";
+import CrmPage from "./pages/services/CrmPage";
+import TelegramPage from "./pages/services/TelegramPage";
+import BlockchainAiPage from "./pages/services/BlockchainAiPage";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +23,13 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/services/web-development" element={<WebDevelopmentPage />} />
+          <Route path="/services/web-design" element={<WebDesignPage />} />
+          <Route path="/services/mobile-apps" element={<MobileAppsPage />} />
+          <Route path="/services/seo" element={<SeoPage />} />
+          <Route path="/services/crm" element={<CrmPage />} />
+          <Route path="/services/telegram" element={<TelegramPage />} />
+          <Route path="/services/blockchain-ai" element={<BlockchainAiPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
