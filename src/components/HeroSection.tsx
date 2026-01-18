@@ -11,9 +11,10 @@ const advantages = [
 
 export const HeroSection = () => {
   return (
-    <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-purple-50 to-indigo-100" />
+    <section 
+      className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #f3e8ff 50%, #e0e7ff 100%)' }}
+    >
       
       {/* Decorative Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
