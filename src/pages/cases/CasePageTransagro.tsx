@@ -27,13 +27,13 @@ const CasePageTransagro = () => {
                   </span>
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Транс Агро
+                  TransAgro
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
                   Корпоративный сайт крупного поставщика минеральных удобрений с каталогом продукции и системой заказов
                 </p>
                 <Button asChild size="lg">
-                  <a href="https://transagro.bxdemo.ru" target="_blank" rel="noopener noreferrer">
+                  <a href="https://transagro.su" target="_blank" rel="noopener noreferrer">
                     Посетить сайт
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </a>
