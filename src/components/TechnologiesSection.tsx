@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import bitrixLogo from "@/assets/bitrix-logo.svg";
 import modxLogo from "@/assets/modx-logo.png";
 import cscartLogo from "@/assets/cscart-logo.png";
@@ -56,8 +57,10 @@ const INITIAL_COUNT = 12;
 
 export const TechnologiesSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
   
-  const visibleTechnologies = isExpanded ? technologies : technologies.slice(0, INITIAL_COUNT);
+  // На десктопе показываем все, на мобильном — с раскрытием
+  const visibleTechnologies = !isMobile || isExpanded ? technologies : technologies.slice(0, INITIAL_COUNT);
   const hiddenCount = technologies.length - INITIAL_COUNT;
 
   return (
@@ -74,17 +77,14 @@ export const TechnologiesSection = () => {
 
         <div 
           className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-4 md:gap-6 overflow-hidden transition-all duration-500 ease-in-out"
-          style={{
-            maxHeight: isExpanded ? `${Math.ceil(technologies.length / 4) * 120}px` : `${Math.ceil(INITIAL_COUNT / 4) * 100}px`
-          }}
         >
           {visibleTechnologies.map((tech, index) => (
             <div 
               key={tech.name} 
               className="group flex flex-col items-center gap-2 p-3 md:p-4 bg-background rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               style={{
-                animation: index >= INITIAL_COUNT && isExpanded ? `fade-in 0.3s ease-out ${(index - INITIAL_COUNT) * 0.03}s forwards` : undefined,
-                opacity: index >= INITIAL_COUNT ? 0 : 1
+                animation: isMobile && index >= INITIAL_COUNT && isExpanded ? `fade-in 0.3s ease-out ${(index - INITIAL_COUNT) * 0.03}s forwards` : undefined,
+                opacity: isMobile && index >= INITIAL_COUNT && !isExpanded ? 0 : 1
               }}
             >
               <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
@@ -101,7 +101,8 @@ export const TechnologiesSection = () => {
           ))}
         </div>
 
-        {hiddenCount > 0 && (
+        {/* Кнопка только для мобильных устройств */}
+        {isMobile && hiddenCount > 0 && (
           <div className="flex justify-center mt-8">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
