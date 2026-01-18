@@ -11,41 +11,38 @@ const advantages = [
 
 export const HeroSection = () => {
   return (
-    <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Decorative Background Elements */}
+    <section className="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-purple-50 to-indigo-100" />
+      
+      {/* Decorative Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        {/* Large gradient orb - top right */}
-        <div 
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(59,130,246,0.1) 40%, transparent 70%)'
-          }}
-        />
+        {/* Large colored circle - top right */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-blue-200/50 rounded-full" />
         
-        {/* Medium gradient orb - bottom left */}
-        <div 
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(99,102,241,0.1) 40%, transparent 70%)'
-          }}
-        />
+        {/* Medium colored circle - bottom left */}
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-purple-200/50 rounded-full" />
         
-        {/* Subtle grid pattern */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.15]" xmlns="http://www.w3.org/2000/svg">
+        {/* Center accent */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-100/30 rounded-full" />
+        
+        {/* Grid pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" strokeWidth="0.5"/>
+            <pattern id="hero-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+              <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#6366f1" strokeWidth="0.5"/>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+          <rect width="100%" height="100%" fill="url(#hero-grid)" />
         </svg>
         
-        {/* Floating dots */}
-        <div className="absolute top-24 left-[15%] w-3 h-3 bg-primary/40 rounded-full" />
-        <div className="absolute top-40 right-[20%] w-2 h-2 bg-blue-500/50 rounded-full" />
-        <div className="absolute bottom-24 left-[25%] w-4 h-4 bg-purple-400/30 rounded-full" />
-        <div className="absolute top-1/2 right-[15%] w-2 h-2 bg-indigo-400/40 rounded-full" />
-        <div className="absolute bottom-40 right-[30%] w-3 h-3 bg-blue-400/30 rounded-full" />
+        {/* Decorative dots */}
+        <div className="absolute top-20 left-[10%] w-4 h-4 bg-blue-400 rounded-full opacity-60" />
+        <div className="absolute top-32 right-[15%] w-3 h-3 bg-purple-500 rounded-full opacity-50" />
+        <div className="absolute bottom-20 left-[20%] w-5 h-5 bg-indigo-400 rounded-full opacity-40" />
+        <div className="absolute top-1/2 right-[10%] w-3 h-3 bg-blue-500 rounded-full opacity-50" />
+        <div className="absolute bottom-32 right-[25%] w-4 h-4 bg-purple-400 rounded-full opacity-40" />
+        <div className="absolute top-40 left-[30%] w-2 h-2 bg-indigo-500 rounded-full opacity-60" />
       </div>
 
       <div className="section-container relative">
