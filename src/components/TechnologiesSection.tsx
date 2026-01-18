@@ -1,4 +1,4 @@
-import bitrixLogo from "@/assets/bitrix-logo.png";
+import bitrixLogo from "@/assets/bitrix-logo.svg";
 import modxLogo from "@/assets/modx-logo.png";
 import cscartLogo from "@/assets/cscart-logo.png";
 
