@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import { vitePrerenderPlugin } from "vite-prerender-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -29,6 +30,16 @@ export default defineConfig(({ mode }) => ({
       webp: { quality: 80, lossless: false },
       cache: true,
       cacheLocation: "node_modules/.cache/image-optimizer",
+    }),
+    // Prerendering для SEO - генерирует статический HTML при сборке
+    mode === "production" && vitePrerenderPlugin({
+      // Где вставлять prerendered HTML
+      renderTarget: "#root",
+      // Путь к скрипту с функцией prerender()
+      prerenderScript: path.resolve(__dirname, "./src/prerender.tsx"),
+      // Дополнительные маршруты, которые нужно prerender
+      // (плагин автоматически найдёт ссылки, но 404 и скрытые страницы указываем явно)
+      additionalPrerenderRoutes: ["/404"],
     }),
   ].filter(Boolean),
   resolve: {

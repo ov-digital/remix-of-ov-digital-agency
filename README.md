@@ -2,6 +2,8 @@
 
 Сайт digital-агентства. React + TypeScript + Tailwind CSS + Vite.
 
+**SEO-оптимизация:** Проект использует prerendering для генерации статического HTML всех страниц при сборке — поисковые системы видят полный контент без выполнения JavaScript.
+
 ## Быстрый старт
 
 ```bash
@@ -11,7 +13,7 @@ npm install
 # Запуск в режиме разработки
 npm run dev
 
-# Сборка для production
+# Сборка для production (с prerendering)
 npm run build
 ```
 
@@ -37,7 +39,7 @@ cp .env.example .env
 
 ### Краткая инструкция
 
-1. `npm run build` — создаёт папку `dist/`
+1. `npm run build` — создаёт папку `dist/` с prerendered HTML
 2. Загрузите содержимое `dist/` на сервер
 3. Настройте Nginx для SPA (все запросы → `index.html`)
 4. Настройте API-сервер для обработки форм
@@ -50,14 +52,24 @@ src/
 ├── pages/          # Страницы
 ├── lib/            # Утилиты (form-handler.ts — точка интеграции форм)
 ├── assets/         # Изображения
-└── data/           # Статические данные
+├── data/           # Статические данные
+├── prerender.tsx   # ⚡ Конфигурация prerendering (SEO)
+└── main.tsx        # Точка входа с hydration
 ```
+
+## Prerendering (SEO)
+
+При добавлении новой страницы обновите:
+1. `src/App.tsx` — маршрут
+2. `src/prerender.tsx` — импорт, маршрут в ROUTES, мета-данные в PAGE_META
+
+Подробнее: [DEPLOYMENT.md → Prerendering](./DEPLOYMENT.md#prerendering-seo)
 
 ## Технологии
 
 - React 18
 - TypeScript
-- Vite
+- Vite + vite-prerender-plugin
 - Tailwind CSS
 - shadcn/ui
 - React Router
