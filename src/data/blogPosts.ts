@@ -1,6 +1,6 @@
-import blogImageCms from "@/assets/blog-cms-new.jpg";
-import blogImageSeo from "@/assets/blog-seo-new.jpg";
-import blogImageTelegram from "@/assets/blog-telegram-new.jpg";
+import blogImageCms from "@/assets/blog-cms-realistic.jpg";
+import blogImageSeo from "@/assets/blog-seo-realistic.jpg";
+import blogImageTelegram from "@/assets/blog-telegram-realistic.jpg";
 
 export interface BlogPost {
   id: number;
