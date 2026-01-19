@@ -1,4 +1,4 @@
-import previewImage from "@/assets/case-fishing-preview.jpg";
+import previewImage from "@/assets/case-fishing-preview.webp";
 
 const FishingWeekendPreview = () => {
   return (
