@@ -114,25 +114,14 @@ const CasePageIgra = () => {
         <section className="section-padding">
           <div className="section-container">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">Визуальные решения</h2>
-            <div className="space-y-8">
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src={caseHero} 
-                  alt="Igra Show - главная страница" 
-                  className="w-full h-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src={casePages} 
-                  alt="Igra Show - страницы сайта" 
-                  className="w-full h-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+            <div className="rounded-xl overflow-hidden shadow-2xl">
+              <img 
+                src={casePages} 
+                alt="Igra Show - страницы сайта" 
+                className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </section>
