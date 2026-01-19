@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-igra-preview.jpg";
+import caseImage from "@/assets/case-igra-desktop.jpg";
 import caseHero from "@/assets/case-igra-hero.jpg";
 import casePages from "@/assets/case-igra-pages.jpg";
 import { PageMeta } from "@/components/PageMeta";
