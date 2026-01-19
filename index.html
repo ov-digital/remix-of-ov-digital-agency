@@ -45,6 +45,45 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     
+    <!-- Critical CSS Inline - Above the fold styles -->
+    <style>
+      /* Critical base styles */
+      *,*::before,*::after{box-sizing:border-box;border-width:0;border-style:solid}
+      html{line-height:1.5;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+      body{margin:0;font-family:'Inter',system-ui,-apple-system,sans-serif;background-color:hsl(0 0% 100%);color:hsl(220 20% 10%);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+      
+      /* Critical layout */
+      .section-container{max-width:80rem;margin-left:auto;margin-right:auto;padding-left:1rem;padding-right:1rem}
+      @media(min-width:640px){.section-container{padding-left:1.5rem;padding-right:1.5rem}}
+      @media(min-width:1024px){.section-container{padding-left:2rem;padding-right:2rem}}
+      
+      /* Header critical */
+      header{position:fixed;top:0;left:0;right:0;z-index:50;background-color:hsla(0,0%,100%,0.8);backdrop-filter:blur(12px);border-bottom:1px solid hsl(220 13% 91%)}
+      header .flex{display:flex;align-items:center;justify-content:space-between;height:4rem}
+      @media(min-width:768px){header .flex{height:5rem}}
+      
+      /* Hero critical - prevent CLS */
+      .hero-section{min-height:100vh;display:flex;align-items:center;padding-top:5rem}
+      
+      /* Button critical */
+      button{cursor:pointer;font-family:inherit}
+      .btn-primary{display:inline-flex;align-items:center;justify-content:center;border-radius:0.75rem;font-size:0.875rem;font-weight:500;height:2.5rem;padding:0 1rem;background:hsl(217 100% 50%);color:white;transition:all 0.2s}
+      .btn-primary:hover{background:hsl(217 100% 45%)}
+      
+      /* Typography critical */
+      h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.2}
+      h1{font-size:2.25rem}
+      @media(min-width:768px){h1{font-size:3.75rem}}
+      
+      /* Gradient text */
+      .gradient-text{background:linear-gradient(135deg,hsl(217,100%,50%) 0%,hsl(230,100%,60%) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+      
+      /* Loading state */
+      #root:empty{display:flex;align-items:center;justify-content:center;min-height:100vh}
+      #root:empty::after{content:'';width:2rem;height:2rem;border:2px solid hsl(217 100% 50%);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite}
+      @keyframes spin{to{transform:rotate(360deg)}}
+    </style>
+    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {

@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import caseImage from "@/assets/case-igra-desktop.jpg";
-import caseHero from "@/assets/case-igra-hero.jpg";
-import casePages from "@/assets/case-igra-pages.jpg";
+import caseImage from "@/assets/case-igra-desktop.webp";
+import caseHero from "@/assets/case-igra-hero.webp";
+import casePages from "@/assets/case-igra-pages.webp";
 import { PageMeta } from "@/components/PageMeta";
 
 const CasePageIgra = () => {

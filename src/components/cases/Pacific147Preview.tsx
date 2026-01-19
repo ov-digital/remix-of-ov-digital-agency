@@ -1,4 +1,4 @@
-import previewImage from "@/assets/case-147pacific-hero.jpg";
+import previewImage from "@/assets/case-147pacific-hero.webp";
 
 const Pacific147Preview = () => {
   return (

@@ -1,4 +1,4 @@
-import previewImage from "@/assets/case-transagro-desktop.jpg";
+import previewImage from "@/assets/case-transagro-desktop.webp";
 
 const TransAgroPreview = () => {
   return (

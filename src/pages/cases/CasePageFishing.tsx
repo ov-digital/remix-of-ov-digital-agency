@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import casePreview from "@/assets/case-fishing-preview.jpg";
-import casePages from "@/assets/case-fishing-pages.jpg";
+import casePreview from "@/assets/case-fishing-preview.webp";
+import casePages from "@/assets/case-fishing-pages.webp";
 import { PageMeta } from "@/components/PageMeta";
 
 const CasePageFishing = () => {

@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import casePreview from "@/assets/case-transagro-desktop.jpg";
-import casePages from "@/assets/case-transagro-mobile.jpg";
+import casePreview from "@/assets/case-transagro-desktop.webp";
+import casePages from "@/assets/case-transagro-mobile.webp";
 import { PageMeta } from "@/components/PageMeta";
 
 const CasePageTransagro = () => {
