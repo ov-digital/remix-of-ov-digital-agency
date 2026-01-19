@@ -96,7 +96,7 @@ const AboutPage = () => {
                       <div className="text-sm text-muted-foreground">Клиентов</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5</div>
+                      <div className="text-4xl md:text-5xl font-bold text-primary mb-2">10</div>
                       <div className="text-sm text-muted-foreground">Специалистов</div>
                     </div>
                   </div>
