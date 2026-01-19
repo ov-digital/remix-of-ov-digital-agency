@@ -63,16 +63,16 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
     }
   };
 
-  const handleChange = (name: string, value: string) => {
+  const handleChange = (name: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (touched[name]) {
       setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     }
   };
 
-  const handleBlur = (name: string) => {
+  const handleBlur = (name: keyof ContactFormData) => {
     setTouched(prev => ({ ...prev, [name]: true }));
-    setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name as keyof ContactFormData] || "") }));
+    setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name] || "") }));
   };
 
   const validateForm = (): boolean => {
@@ -133,32 +133,8 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
     }
   };
 
-  const InputWithError = ({ name, type = "text", placeholder, maxLength, required = false }: {
-    name: keyof ContactFormData;
-    type?: string;
-    placeholder: string;
-    maxLength: number;
-    required?: boolean;
-  }) => (
-    <div className="space-y-1">
-      <Input
-        type={type}
-        placeholder={placeholder}
-        value={formData[name]}
-        onChange={(e) => handleChange(name, e.target.value)}
-        onBlur={() => handleBlur(name)}
-        required={required}
-        maxLength={maxLength}
-        className={errors[name] && touched[name] ? "border-destructive focus-visible:ring-destructive" : ""}
-      />
-      {errors[name] && touched[name] && (
-        <p className="text-xs text-destructive flex items-center gap-1">
-          <AlertCircle className="w-3 h-3" />
-          {errors[name]}
-        </p>
-      )}
-    </div>
-  );
+  const getInputClassName = (name: keyof ContactFormData) => 
+    errors[name] && touched[name] ? "border-destructive focus-visible:ring-destructive" : "";
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -171,25 +147,66 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <InputWithError 
-            name="name" 
-            placeholder="Ваше имя *" 
-            maxLength={100} 
-            required 
-          />
-          <InputWithError 
-            name="email" 
-            type="email" 
-            placeholder="Email (например: ivan@company.ru) *" 
-            maxLength={255} 
-            required 
-          />
-          <InputWithError 
-            name="phone" 
-            type="tel" 
-            placeholder="Телефон (например: +7 978 123-45-67)" 
-            maxLength={20} 
-          />
+          {/* Name field */}
+          <div className="space-y-1">
+            <Input
+              type="text"
+              placeholder="Ваше имя *"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+              onBlur={() => handleBlur("name")}
+              required
+              maxLength={100}
+              className={getInputClassName("name")}
+            />
+            {errors.name && touched.name && (
+              <p className="text-xs text-destructive flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />
+                {errors.name}
+              </p>
+            )}
+          </div>
+
+          {/* Email field */}
+          <div className="space-y-1">
+            <Input
+              type="email"
+              placeholder="Email (например: ivan@company.ru) *"
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              onBlur={() => handleBlur("email")}
+              required
+              maxLength={255}
+              className={getInputClassName("email")}
+            />
+            {errors.email && touched.email && (
+              <p className="text-xs text-destructive flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />
+                {errors.email}
+              </p>
+            )}
+          </div>
+
+          {/* Phone field */}
+          <div className="space-y-1">
+            <Input
+              type="tel"
+              placeholder="Телефон (например: +7 978 123-45-67)"
+              value={formData.phone}
+              onChange={(e) => handleChange("phone", e.target.value)}
+              onBlur={() => handleBlur("phone")}
+              maxLength={20}
+              className={getInputClassName("phone")}
+            />
+            {errors.phone && touched.phone && (
+              <p className="text-xs text-destructive flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />
+                {errors.phone}
+              </p>
+            )}
+          </div>
+
+          {/* Message field */}
           <div className="space-y-1">
             <Textarea
               placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
@@ -199,7 +216,7 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
               rows={4}
               required
               maxLength={1000}
-              className={errors.message && touched.message ? "border-destructive focus-visible:ring-destructive" : ""}
+              className={getInputClassName("message")}
             />
             {errors.message && touched.message && (
               <p className="text-xs text-destructive flex items-center gap-1">
