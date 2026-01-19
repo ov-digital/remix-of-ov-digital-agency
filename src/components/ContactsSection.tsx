@@ -6,9 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, Send, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { submitContactForm, validateCaptcha, type ContactFormData } from "@/lib/form-handler";
 
 export const ContactsSection = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
@@ -17,7 +18,6 @@ export const ContactsSection = () => {
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const lastSubmitTime = useRef<number>(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,42 +26,29 @@ export const ContactsSection = () => {
       toast.error("Необходимо дать согласие на обработку персональных данных");
       return;
     }
-
-    // Защита от повторных отправок (минимум 30 секунд между заявками)
-    const now = Date.now();
-    if (now - lastSubmitTime.current < 30000) {
-      toast.error("Подождите немного перед повторной отправкой");
-      return;
-    }
     
     setIsSubmitting(true);
     
     try {
-      const response = await fetch("https://formspree.io/f/xkgwqnpj", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim(),
-          message: formData.message.trim(),
-          consent: "Да, пользователь дал согласие на обработку персональных данных",
-          _subject: `Новая заявка от ${formData.name.trim()} - OV Digital Agency`,
-        }),
-      });
+      // Валидация капчи (если настроена)
+      const captchaResult = await validateCaptcha();
+      if (!captchaResult.isValid) {
+        toast.error("Проверка капчи не пройдена. Попробуйте снова.");
+        setIsSubmitting(false);
+        return;
+      }
 
-      if (response.ok) {
-        lastSubmitTime.current = now;
+      // Отправка формы
+      const result = await submitContactForm(formData, captchaResult.token);
+
+      if (result.success) {
         setIsSuccess(true);
-        toast.success("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
+        toast.success(result.message);
         setFormData({ name: "", email: "", phone: "", message: "" });
         setConsent(false);
-        // Сбросить состояние успеха через 5 секунд
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        toast.error("Не удалось отправить заявку. Попробуйте написать нам в Telegram.");
+        toast.error(result.message);
       }
     } catch (error) {
       toast.error("Ошибка соединения. Проверьте интернет или напишите нам в Telegram.");
