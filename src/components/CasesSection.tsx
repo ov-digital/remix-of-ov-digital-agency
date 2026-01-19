@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
 import FishingWeekendPreview from "./cases/FishingWeekendPreview";
 import Pacific147Preview from "./cases/Pacific147Preview";
 import IgraShowPreview from "./cases/IgraShowPreview";
@@ -101,13 +102,18 @@ export const CasesSection = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/portfolio">
             <Button variant="outline" size="lg" className="rounded-full">
               Все работы
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
+          <ContactFormPopup>
+            <Button variant="default" size="lg" className="rounded-full">
+              Заказать похожий проект
+            </Button>
+          </ContactFormPopup>
         </div>
       </div>
     </section>
