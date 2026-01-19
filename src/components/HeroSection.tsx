@@ -15,7 +15,7 @@ export const HeroSection = () => {
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up">
-            Помогаем российскому бизнесу 📈{" "}
+            Помогаем российскому бизнесу{" "}
             <span className="gradient-text">увеличить продажи</span> через digital-продукты
           </h1>
           
