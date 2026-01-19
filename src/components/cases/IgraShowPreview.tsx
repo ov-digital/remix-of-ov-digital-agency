@@ -1,4 +1,4 @@
-import previewImage from "@/assets/case-igra-preview.jpg";
+import previewImage from "@/assets/case-igra-desktop.jpg";
 
 const IgraShowPreview = () => {
   return (
