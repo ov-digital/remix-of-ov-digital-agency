@@ -192,8 +192,8 @@ export const ServicePageLayout = ({
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
-                <a href="mailto:ov.digital.agency@gmail.com">
-                  ov.digital.agency@gmail.com
+                <a href="mailto:ov.digital.agency@yandex.ru">
+                  ov.digital.agency@yandex.ru
                 </a>
               </Button>
             </div>
