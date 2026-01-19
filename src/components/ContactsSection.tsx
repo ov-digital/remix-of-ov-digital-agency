@@ -189,7 +189,7 @@ export const ContactsSection = () => {
               
               <div className="space-y-4">
                 <a
-                  href="mailto:ov.digital.agency@gmail.com"
+                  href="mailto:ov.digital.agency@yandex.ru"
                   className="flex items-center gap-4 p-4 bg-background rounded-lg card-shadow hover:card-shadow-hover transition-all hover:-translate-y-0.5"
                 >
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -197,7 +197,7 @@ export const ContactsSection = () => {
                   </div>
                   <div>
                     <div className="font-medium">Email</div>
-                    <div className="text-muted-foreground text-sm">ov.digital.agency@gmail.com</div>
+                    <div className="text-muted-foreground text-sm">ov.digital.agency@yandex.ru</div>
                   </div>
                 </a>
 
