@@ -80,7 +80,7 @@ export const ServicesSection = () => {
             Услуги
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Полный цикл разработки digital-продуктов — от идеи до запуска и поддержки
+            Полный цикл разработки digital-продуктов — от идеи до запуска и поддержки. Помогаем бизнесу в Луганске, Москве, СПб и по всей России
           </p>
           <div className="mt-4 inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             <span>Почасовая ставка: 2 750 ₽ / час</span>
@@ -108,6 +108,15 @@ export const ServicesSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA после секции */}
+        <div className="text-center mt-10">
+          <ContactFormPopup>
+            <Button variant="outline" size="lg" className="rounded-full">
+              Узнать стоимость для вашего проекта
+            </Button>
+          </ContactFormPopup>
         </div>
       </div>
     </section>

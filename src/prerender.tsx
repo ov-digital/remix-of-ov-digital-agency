@@ -81,56 +81,56 @@ interface PageMeta {
 
 const PAGE_META: Record<string, PageMeta> = {
   "/": {
-    title: "OV Digital Agency - создаём сайты и digital-продукты под ключ. Дизайн, разработка, автоматизация.",
-    description: "Создаём сайты, интернет-магазины, мобильные приложения, CRM и Telegram-боты под ключ. 10+ лет опыта. Дизайн, разработка, автоматизация бизнес-процессов.",
+    title: "Создание сайтов в Луганске | OV Digital Agency — веб-разработка, CRM, автоматизация бизнеса",
+    description: "Разработка сайтов, интернет-магазинов, CRM-систем и автоматизация бизнеса в Луганске, Москве, СПб и по всей России. 10+ лет опыта. Помогаем увеличить продажи через digital-продукты.",
   },
   "/about": {
-    title: "О компании | OV Digital Agency",
-    description: "Узнайте больше о нашей команде и подходе к работе. 10+ лет опыта в digital-разработке.",
+    title: "О компании | OV Digital Agency — веб-студия в Луганске",
+    description: "Команда профессионалов с 10+ летним опытом в digital-разработке. Создаём сайты и автоматизируем бизнес-процессы для компаний в Луганске и по всей России.",
   },
   "/blog": {
-    title: "Блог | OV Digital Agency",
-    description: "Полезные статьи о веб-разработке, SEO, автоматизации бизнеса и digital-маркетинге.",
+    title: "Блог о веб-разработке и автоматизации бизнеса | OV Digital Agency",
+    description: "Полезные статьи о создании сайтов, SEO-продвижении, CRM-системах и автоматизации бизнес-процессов. Советы от экспертов.",
   },
   "/portfolio": {
-    title: "Портфолио | OV Digital Agency",
-    description: "Наши лучшие проекты: сайты, интернет-магазины, мобильные приложения и CRM-системы.",
+    title: "Портфолио веб-студии | OV Digital Agency — кейсы и проекты",
+    description: "Примеры реализованных проектов: сайты, интернет-магазины, CRM-системы. Реальные результаты для бизнеса в Луганске, Москве и регионах России.",
   },
   "/privacy-policy": {
     title: "Политика конфиденциальности | OV Digital Agency",
     description: "Политика обработки персональных данных OV Digital Agency.",
   },
   "/services/web-development": {
-    title: "Разработка сайтов | OV Digital Agency",
-    description: "Создаём современные сайты и веб-приложения на React, 1С-Битрикс, WordPress. От лендинга до enterprise-портала.",
+    title: "Разработка сайтов в Луганске и России | OV Digital Agency",
+    description: "Создание современных сайтов и интернет-магазинов на React, 1С-Битрикс, WordPress. Веб-разработка под ключ в Луганске, Москве, СПб.",
   },
   "/services/web-design": {
-    title: "Дизайн сайтов | OV Digital Agency",
-    description: "UI/UX дизайн сайтов и мобильных приложений. Современный подход, удобство для пользователей.",
+    title: "Дизайн сайтов | UI/UX дизайн под ключ | OV Digital Agency",
+    description: "Профессиональный веб-дизайн сайтов и мобильных приложений. Удобные интерфейсы, которые увеличивают конверсию.",
   },
   "/services/mobile-apps": {
-    title: "Мобильные приложения | OV Digital Agency",
-    description: "Разработка мобильных приложений для iOS и Android. React Native, Flutter, нативная разработка.",
+    title: "Разработка мобильных приложений iOS и Android | OV Digital Agency",
+    description: "Создание мобильных приложений для бизнеса на React Native и Flutter. Кроссплатформенная разработка в Луганске и России.",
   },
   "/services/seo": {
-    title: "SEO-продвижение | OV Digital Agency",
-    description: "Комплексное SEO-продвижение сайтов в Яндекс и Google. Аудит, оптимизация, контент-маркетинг.",
+    title: "SEO-продвижение сайтов в Луганске и России | OV Digital Agency",
+    description: "Комплексное SEO-продвижение в Яндекс и Google. Увеличиваем органический трафик и продажи для бизнеса в Луганске, Москве, СПб.",
   },
   "/services/crm": {
-    title: "CRM и автоматизация | OV Digital Agency",
-    description: "Внедрение CRM-систем и автоматизация бизнес-процессов. Bitrix24, AmoCRM, 1С.",
+    title: "Внедрение CRM-систем | Автоматизация бизнеса | OV Digital Agency",
+    description: "Настройка Bitrix24, AmoCRM, интеграции с 1С. Автоматизация продаж и бизнес-процессов для компаний в Луганске и России.",
   },
   "/services/telegram": {
-    title: "Telegram-боты и Mini Apps | OV Digital Agency",
-    description: "Разработка Telegram-ботов и Mini Apps для бизнеса. Автоматизация, продажи, клиентский сервис.",
+    title: "Разработка Telegram-ботов и Mini Apps | OV Digital Agency",
+    description: "Создание Telegram-ботов для бизнеса: автоматизация, продажи, поддержка клиентов. Разработка Mini Apps в Луганске и России.",
   },
   "/services/blockchain-ai": {
-    title: "Blockchain и AI решения | OV Digital Agency",
-    description: "Разработка решений на базе блокчейн и искусственного интеллекта для бизнеса.",
+    title: "Blockchain и AI решения для бизнеса | OV Digital Agency",
+    description: "Разработка смарт-контрактов, DeFi-проектов, AI-ботов и решений на базе искусственного интеллекта.",
   },
   "/services/devops": {
-    title: "DevOps и инфраструктура | OV Digital Agency",
-    description: "DevOps-услуги: CI/CD, Docker, Kubernetes, облачная инфраструктура, мониторинг.",
+    title: "DevOps и облачная инфраструктура | OV Digital Agency",
+    description: "DevOps-услуги: настройка CI/CD, Docker, Kubernetes, облачная архитектура AWS, GCP. Надёжная инфраструктура для бизнеса.",
   },
   "/cases/147pacific": {
     title: "Кейс 147 Pacific | OV Digital Agency",

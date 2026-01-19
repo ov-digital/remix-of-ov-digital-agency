@@ -1,12 +1,19 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, Phone, Send, CheckCircle, Loader2 } from "lucide-react";
+import { Mail, Phone, Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { submitContactForm, validateCaptcha, type ContactFormData } from "@/lib/form-handler";
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+}
 
 export const ContactsSection = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -15,12 +22,65 @@ export const ContactsSection = () => {
     phone: "",
     message: "",
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case "name":
+        if (!value.trim()) return "Введите ваше имя";
+        if (value.trim().length < 2) return "Имя должно быть не менее 2 символов";
+        return undefined;
+      case "email":
+        if (!value.trim()) return "Введите email";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Введите корректный email";
+        return undefined;
+      case "phone":
+        if (value && !/^[\d\s\-\+\(\)]+$/.test(value)) return "Введите корректный телефон";
+        return undefined;
+      case "message":
+        if (!value.trim()) return "Введите сообщение";
+        if (value.trim().length < 10) return "Сообщение должно быть не менее 10 символов";
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (touched[name]) {
+      setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
+  };
+
+  const handleBlur = (name: string) => {
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setErrors(prev => ({ ...prev, [name]: validateField(name, formData[name as keyof ContactFormData] || "") }));
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {
+      name: validateField("name", formData.name),
+      email: validateField("email", formData.email),
+      phone: validateField("phone", formData.phone || ""),
+      message: validateField("message", formData.message),
+    };
+    setErrors(newErrors);
+    setTouched({ name: true, email: true, phone: true, message: true });
+    return !Object.values(newErrors).some(Boolean);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      toast.error("Пожалуйста, исправьте ошибки в форме");
+      return;
+    }
     
     if (!consent) {
       toast.error("Необходимо дать согласие на обработку персональных данных");
@@ -30,7 +90,6 @@ export const ContactsSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Валидация капчи (если настроена)
       const captchaResult = await validateCaptcha();
       if (!captchaResult.isValid) {
         toast.error("Проверка капчи не пройдена. Попробуйте снова.");
@@ -38,14 +97,15 @@ export const ContactsSection = () => {
         return;
       }
 
-      // Отправка формы
       const result = await submitContactForm(formData, captchaResult.token);
 
       if (result.success) {
         setIsSuccess(true);
-        toast.success(result.message);
+        toast.success("🎉 Спасибо! Ваша заявка принята. Мы свяжемся с вами в течение 24 часов.");
         setFormData({ name: "", email: "", phone: "", message: "" });
         setConsent(false);
+        setErrors({});
+        setTouched({});
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
         toast.error(result.message);
@@ -56,6 +116,33 @@ export const ContactsSection = () => {
       setIsSubmitting(false);
     }
   };
+
+  const InputWithError = ({ name, type = "text", placeholder, maxLength, required = false }: {
+    name: keyof ContactFormData;
+    type?: string;
+    placeholder: string;
+    maxLength: number;
+    required?: boolean;
+  }) => (
+    <div className="space-y-1">
+      <Input
+        type={type}
+        placeholder={placeholder}
+        value={formData[name]}
+        onChange={(e) => handleChange(name, e.target.value)}
+        onBlur={() => handleBlur(name)}
+        required={required}
+        maxLength={maxLength}
+        className={errors[name] && touched[name] ? "border-destructive focus-visible:ring-destructive" : ""}
+      />
+      {errors[name] && touched[name] && (
+        <p className="text-xs text-destructive flex items-center gap-1">
+          <AlertCircle className="w-3 h-3" />
+          {errors[name]}
+        </p>
+      )}
+    </div>
+  );
 
   return (
     <section id="contacts" className="section-padding bg-card">
@@ -75,43 +162,42 @@ export const ContactsSection = () => {
             <h3 className="font-semibold text-xl mb-6">Обсудить проект</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Input
-                  placeholder="Ваше имя *"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  maxLength={100}
-                />
-              </div>
-              <div>
-                <Input
-                  type="email"
-                  placeholder="Email *"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  maxLength={255}
-                />
-              </div>
-              <div>
-                <Input
-                  type="tel"
-                  placeholder="Телефон"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  maxLength={20}
-                />
-              </div>
-              <div>
+              <InputWithError 
+                name="name" 
+                placeholder="Ваше имя *" 
+                maxLength={100} 
+                required 
+              />
+              <InputWithError 
+                name="email" 
+                type="email" 
+                placeholder="Email (например: ivan@company.ru) *" 
+                maxLength={255} 
+                required 
+              />
+              <InputWithError 
+                name="phone" 
+                type="tel" 
+                placeholder="Телефон (например: +7 978 123-45-67)" 
+                maxLength={20} 
+              />
+              <div className="space-y-1">
                 <Textarea
-                  placeholder="Расскажите о вашем проекте *"
+                  placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => handleChange("message", e.target.value)}
+                  onBlur={() => handleBlur("message")}
                   rows={4}
                   required
                   maxLength={1000}
+                  className={errors.message && touched.message ? "border-destructive focus-visible:ring-destructive" : ""}
                 />
+                {errors.message && touched.message && (
+                  <p className="text-xs text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.message}
+                  </p>
+                )}
               </div>
               
               {/* Consent checkbox */}

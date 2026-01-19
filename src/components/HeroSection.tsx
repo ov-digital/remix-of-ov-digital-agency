@@ -15,12 +15,12 @@ export const HeroSection = () => {
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up">
-            OV Digital Agency — разработка и внедрение{" "}
-            <span className="gradient-text">digital-решений</span> для бизнеса
+            Помогаем российскому бизнесу 📈{" "}
+            <span className="gradient-text">увеличить продажи</span> через digital-продукты
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Создаем сайты, интернет-магазины, корпоративные порталы, мобильные приложения, CRM и Telegram-боты. Работаем с бизнесом по всей России
+            Создаём сайты, CRM, автоматизации под задачи бизнеса. Луганск, Москва, СПб и вся Россия
           </p>
 
           {/* CTA Buttons */}

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
+import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 export const BlogSection = () => {
   // Show only first 3 posts on homepage
@@ -59,13 +60,18 @@ export const BlogSection = () => {
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/blog">
             <Button variant="outline" size="lg" className="rounded-full">
               Все статьи
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
+          <ContactFormPopup>
+            <Button variant="default" size="lg" className="rounded-full">
+              Получить консультацию
+            </Button>
+          </ContactFormPopup>
         </div>
       </div>
     </section>
