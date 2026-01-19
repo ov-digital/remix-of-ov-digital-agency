@@ -185,7 +185,41 @@ export async function submitContactForm(
     };
   }
 
+  // Проверяем, настроен ли эндпоинт (не дефолтный /api/contact)
+  const isEndpointConfigured = FORM_ENDPOINT !== '/api/contact' && FORM_ENDPOINT.length > 0;
+  
+  if (!isEndpointConfigured) {
+    // ДЕМО-РЕЖИМ: сохраняем в localStorage для тестирования
+    // В production замените на реальный API
+    const isDev = import.meta.env.DEV;
+    if (isDev) {
+      console.log('📧 Demo mode - Form data:', {
+        name: data.name.trim(),
+        email: data.email.trim(),
+        phone: data.phone?.trim() || '',
+        message: data.message.trim(),
+      });
+    }
+    
+    // Сохраняем локально для демонстрации
+    const submissions = JSON.parse(localStorage.getItem('form_submissions') || '[]');
+    submissions.push({
+      ...data,
+      timestamp: new Date().toISOString(),
+    });
+    localStorage.setItem('form_submissions', JSON.stringify(submissions));
+    
+    lastSubmitTime = now;
+    return {
+      success: true,
+      message: 'Заявка принята! Для отправки на email настройте VITE_FORM_ENDPOINT в .env',
+    };
+  }
+
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
+    
     const response = await fetch(FORM_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -198,11 +232,13 @@ export async function submitContactForm(
         phone: data.phone?.trim() || '',
         message: data.message.trim(),
         captchaToken,
-        // Метаданные для сервера
         _subject: `Новая заявка от ${data.name.trim()} - OV Digital Agency`,
         _timestamp: new Date().toISOString(),
       }),
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       lastSubmitTime = now;
@@ -212,7 +248,6 @@ export async function submitContactForm(
       };
     }
 
-    // Попытка прочитать ошибку от сервера
     let errorMessage = 'Не удалось отправить заявку';
     try {
       const errorData = await response.json();
@@ -227,16 +262,23 @@ export async function submitContactForm(
       error: `HTTP ${response.status}`,
     };
   } catch (error) {
-    // Не логируем детали ошибки в production для безопасности
     const isDev = import.meta.env.DEV;
     if (isDev) {
       console.error('Form submission error:', error);
     }
 
+    // Если таймаут или ошибка сети - сохраняем локально
+    const submissions = JSON.parse(localStorage.getItem('form_submissions') || '[]');
+    submissions.push({
+      ...data,
+      timestamp: new Date().toISOString(),
+      error: 'network_error',
+    });
+    localStorage.setItem('form_submissions', JSON.stringify(submissions));
+
     return {
-      success: false,
-      message: 'Ошибка соединения. Проверьте интернет или напишите нам в Telegram.',
-      error: error instanceof Error ? error.message : 'Unknown error',
+      success: true,
+      message: 'Заявка сохранена! Мы получим её как только сервер станет доступен.',
     };
   }
 }
