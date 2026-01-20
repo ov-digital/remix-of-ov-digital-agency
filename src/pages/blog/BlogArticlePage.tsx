@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { getBlogPostBySlug } from "@/data/blogPosts";
+import { PageMeta } from "@/components/PageMeta";
 
 const BlogArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -60,6 +61,10 @@ const BlogArticlePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta 
+        title={post.title} 
+        description={post.excerpt}
+      />
       <Header />
       <main>
         {/* Hero Section */}
