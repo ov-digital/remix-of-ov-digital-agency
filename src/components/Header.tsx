@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ContactFormPopup } from "@/components/ContactFormPopup";
@@ -17,6 +17,8 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,24 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
     if (!isHomePage) {
@@ -77,6 +97,7 @@ export const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
+            ref={buttonRef}
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Меню"
@@ -87,7 +108,7 @@ export const Header = () => {
 
 {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-background border-b border-border shadow-xl">
+          <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 z-50 bg-background border-b border-border shadow-xl">
             <nav className="flex flex-col px-4 py-6">
               {navLinks.map((link) => (
                 link.isHash ? (
