@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 const advantages = [
   "10+ лет опыта",
-  "Работаем официально (ИП)",
-  "Почасовая и фикс-прайс модель",
+  "Работаем официально",
+  "Гибкие модели оплаты",
   "Собственная команда",
 ];
 
@@ -15,26 +15,42 @@ export const HeroSection = () => {
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up">
-            Помогаем российскому бизнесу{" "}
-            <span className="gradient-text">увеличить продажи</span> через digital-продукты
+            Создаём digital-продукты, которые{" "}
+            <span className="gradient-text">увеличивают продажи</span> бизнеса
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Создаём сайты, CRM, автоматизации под задачи бизнеса. Луганск, Москва, СПб и вся Россия
+          <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
+            Сайты, CRM и автоматизация под ключ — от идеи до запуска и поддержки
           </p>
 
+          {/* Микро-доверие с географией */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.15s" }}>
+            <span className="text-sm md:text-base text-foreground font-medium">
+              Работаем с компаниями по всей России
+            </span>
+            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <MapPin className="w-4 h-4 text-primary" />
+              <span>Луганск · Москва · Санкт-Петербург</span>
+            </div>
+          </div>
+
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
             <ContactFormPopup>
               <Button variant="hero" size="lg">
-                Обсудить проект
+                Получить консультацию
                 <ArrowRight size={20} />
               </Button>
             </ContactFormPopup>
             <Button variant="heroOutline" size="lg" asChild>
-              <a href="#cases">Смотреть портфолио</a>
+              <a href="#cases">Смотреть примеры работ</a>
             </Button>
           </div>
+
+          {/* Микро-текст под кнопками */}
+          <p className="text-xs md:text-sm text-muted-foreground mb-10 animate-fade-up" style={{ animationDelay: "0.25s" }}>
+            Ответим в течение 2 часов в рабочее время
+          </p>
 
           {/* Advantages */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
