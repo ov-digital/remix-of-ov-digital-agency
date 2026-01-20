@@ -15,6 +15,7 @@ const navLinks = [
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const menuRef = useRef<HTMLDivElement>(null);
@@ -23,10 +24,42 @@ export const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Determine active section based on scroll position
+      if (isHomePage) {
+        const sections = ['services', 'technologies', 'cases', 'contacts'];
+        let currentSection = '';
+        
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 150 && rect.bottom >= 150) {
+              currentSection = `#${section}`;
+              break;
+            }
+          }
+        }
+        setActiveSection(currentSection);
+      }
     };
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
+
+  // Set active section based on current route
+  useEffect(() => {
+    if (location.pathname === "/about") {
+      setActiveSection("/about");
+    } else if (location.pathname === "/") {
+      // Check hash on load
+      if (location.hash) {
+        setActiveSection(location.hash);
+      }
+    }
+  }, [location]);
 
   // Close menu on click outside
   useEffect(() => {
@@ -52,6 +85,31 @@ export const Header = () => {
     }
   };
 
+  const isActive = (href: string) => {
+    if (href === "/about") {
+      return location.pathname === "/about";
+    }
+    return activeSection === href;
+  };
+
+  const getLinkClasses = (href: string, isMobile: boolean = false) => {
+    const active = isActive(href);
+    if (isMobile) {
+      return `text-base font-medium transition-colors py-3 border-b border-border/50 last:border-b-0 ${
+        active 
+          ? 'text-primary' 
+          : 'text-foreground hover:text-primary'
+      }`;
+    }
+    return `text-sm font-medium transition-colors relative py-1 ${
+      active 
+        ? 'text-primary' 
+        : 'text-muted-foreground hover:text-foreground'
+    } after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:bg-primary after:transition-transform after:duration-300 ${
+      active ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'
+    }`;
+  };
+
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border transition-all duration-300 ${isScrolled ? 'py-0' : 'py-1'}`}>
@@ -73,7 +131,7 @@ export const Header = () => {
                   <a
                     key={link.href}
                     href={isHomePage ? link.href : "/" + link.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className={getLinkClasses(link.href)}
                   >
                     {link.label}
                   </a>
@@ -81,7 +139,7 @@ export const Header = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className={getLinkClasses(link.href)}
                   >
                     {link.label}
                   </Link>
@@ -130,7 +188,7 @@ export const Header = () => {
                   <a
                     key={link.href}
                     href={isHomePage ? link.href : "/" + link.href}
-                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-border/50 last:border-b-0"
+                    className={getLinkClasses(link.href, true)}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -139,7 +197,7 @@ export const Header = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-border/50 last:border-b-0"
+                    className={getLinkClasses(link.href, true)}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
