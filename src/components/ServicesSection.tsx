@@ -97,9 +97,10 @@ export const ServicesSection = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
-            <div
+            <Link
               key={service.title}
-              className="group bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              to={service.link}
+              className="group bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer"
             >
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
                 <service.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
@@ -110,11 +111,11 @@ export const ServicesSection = () => {
               
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                 <span className="font-semibold text-primary">{service.price}</span>
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to={service.link}>Подробнее →</Link>
-                </Button>
+                <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                  Подробнее →
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
