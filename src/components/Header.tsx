@@ -87,14 +87,14 @@ export const Header = () => {
 
 {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
-            <nav className="flex flex-col gap-4">
+          <div className="lg:hidden py-4 border-t border-border animate-fade-in bg-background absolute top-full left-0 right-0 z-50 shadow-lg">
+            <nav className="section-container flex flex-col gap-4">
               {navLinks.map((link) => (
                 link.isHash ? (
                   <a
                     key={link.href}
                     href={isHomePage ? link.href : "/" + link.href}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -103,18 +103,20 @@ export const Header = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 )
               ))}
-              <ContactFormPopup>
-                <Button className="mt-2" onClick={() => setIsMenuOpen(false)}>
-                  Обсудить проект
-                </Button>
-              </ContactFormPopup>
+              <div className="mt-2">
+                <ContactFormPopup>
+                  <Button className="w-full">
+                    Обсудить проект
+                  </Button>
+                </ContactFormPopup>
+              </div>
             </nav>
           </div>
         )}
