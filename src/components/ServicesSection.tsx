@@ -111,7 +111,7 @@ export const ServicesSection = () => {
               
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                 <span className="font-semibold text-primary">{service.price}</span>
-                <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                <span className="text-sm text-muted-foreground group-hover:text-primary group-hover:bg-primary/10 px-3 py-1.5 rounded-md transition-all">
                   Подробнее →
                 </span>
               </div>
