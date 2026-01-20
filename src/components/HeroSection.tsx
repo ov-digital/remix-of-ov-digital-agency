@@ -19,8 +19,13 @@ export const HeroSection = () => {
             <span className="gradient-text">увеличивают продажи</span> бизнеса
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Сайты, CRM и автоматизация под ключ — от идеи до запуска и поддержки
+          <p className="text-lg md:text-xl text-muted-foreground mb-2 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
+            Разрабатываем решения под ключ — от идеи до запуска и поддержки
+          </p>
+
+          {/* Список услуг */}
+          <p className="text-sm md:text-base text-muted-foreground/80 mb-6 animate-fade-up" style={{ animationDelay: "0.12s" }}>
+            Сайты · Мобильные приложения · CRM · Автоматизация
           </p>
 
           {/* Микро-доверие с географией */}
