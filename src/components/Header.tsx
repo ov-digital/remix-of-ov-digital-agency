@@ -87,14 +87,14 @@ export const Header = () => {
 
 {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in bg-background absolute top-full left-0 right-0 z-50 shadow-lg">
-            <nav className="section-container flex flex-col gap-4">
+          <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-background border-b border-border shadow-xl">
+            <nav className="flex flex-col px-4 py-6">
               {navLinks.map((link) => (
                 link.isHash ? (
                   <a
                     key={link.href}
                     href={isHomePage ? link.href : "/" + link.href}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-border/50 last:border-b-0"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -103,16 +103,16 @@ export const Header = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-border/50 last:border-b-0"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 )
               ))}
-              <div className="mt-2">
+              <div className="mt-4 pt-2">
                 <ContactFormPopup>
-                  <Button className="w-full">
+                  <Button className="w-full" size="lg">
                     Обсудить проект
                   </Button>
                 </ContactFormPopup>
