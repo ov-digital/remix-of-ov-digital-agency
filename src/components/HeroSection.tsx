@@ -20,7 +20,7 @@ export const HeroSection = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-2 max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Разрабатываем решения под ключ — от идеи до запуска и поддержки
+            Проектируем и внедряем решения под ключ — от идеи до запуска и поддержки
           </p>
 
           {/* Список услуг */}
