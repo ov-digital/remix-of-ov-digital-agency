@@ -13,61 +13,72 @@ import {
 import { ContactFormPopup } from "@/components/ContactFormPopup";
 
 const services = [
+  // Основные услуги
   {
     icon: Globe,
     title: "Разработка веб-проектов",
-    description: "Сайты, интернет-магазины, корпоративные порталы, веб-сервисы любой сложности",
+    description: "Создаём сайты и сервисы, которые привлекают клиентов и увеличивают продажи",
     price: "от 150 000 ₽",
     link: "/services/web-development",
+    category: "main",
   },
   {
     icon: Palette,
     title: "Веб-дизайн",
-    description: "UI/UX дизайн сайтов и мобильных приложений, прототипирование, фирменный стиль",
+    description: "Дизайн, который выделяет вас среди конкурентов и вызывает доверие клиентов",
     price: "от 50 000 ₽",
     link: "/services/web-design",
+    category: "main",
   },
   {
     icon: Smartphone,
     title: "Мобильные приложения",
-    description: "Кроссплатформенные приложения на React Native и Flutter для iOS и Android",
+    description: "Приложения для iOS и Android — ваш бизнес всегда под рукой у клиента",
     price: "от 300 000 ₽",
     link: "/services/mobile-apps",
-  },
-  {
-    icon: Server,
-    title: "DevOps и инфраструктура",
-    description: "Настройка серверов, Docker, Kubernetes, CI/CD, облачная архитектура",
-    price: "от 100 000 ₽",
-    link: "/services/devops",
-  },
-  {
-    icon: Search,
-    title: "SEO и контекстная реклама",
-    description: "Комплексное продвижение сайтов, настройка рекламных кампаний, аналитика",
-    price: "от 30 000 ₽/мес",
-    link: "/services/seo",
+    category: "main",
   },
   {
     icon: Settings,
     title: "CRM и автоматизация",
-    description: "Внедрение и настройка Bitrix24, AmoCRM, интеграции с внешними сервисами",
+    description: "Систематизируем продажи и освобождаем время команды от рутины",
     price: "от 80 000 ₽",
     link: "/services/crm",
+    category: "main",
   },
+  // Поддержка и рост
+  {
+    icon: Search,
+    title: "SEO и контекстная реклама",
+    description: "Приводим целевых клиентов из поиска и увеличиваем отдачу от рекламы",
+    price: "от 30 000 ₽/мес",
+    link: "/services/seo",
+    category: "growth",
+  },
+  {
+    icon: Server,
+    title: "DevOps и инфраструктура",
+    description: "Обеспечиваем стабильную работу сервисов 24/7 и быстрое масштабирование",
+    price: "от 100 000 ₽",
+    link: "/services/devops",
+    category: "growth",
+  },
+  // Advanced
   {
     icon: MessageSquare,
     title: "Telegram-решения",
-    description: "Telegram-боты, Mini Apps, интеграции с CRM и платежными системами",
+    description: "Боты и мини-приложения для продаж, поддержки и коммуникации с клиентами",
     price: "от 50 000 ₽",
     link: "/services/telegram",
+    category: "advanced",
   },
   {
     icon: Cpu,
     title: "Blockchain / Web3 / AI",
-    description: "Смарт-контракты, DeFi-проекты, AI-решения, чат-боты с ИИ",
+    description: "Передовые технологии для бизнесов, готовых к инновациям",
     price: "от 200 000 ₽",
     link: "/services/blockchain-ai",
+    category: "advanced",
   },
 ];
 
@@ -80,14 +91,11 @@ export const ServicesSection = () => {
             Услуги
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Полный цикл разработки digital-продуктов — от идеи до запуска и поддержки. Помогаем бизнесу в Луганске, Москве, СПб и по всей России
+            Помогаем бизнесу расти: автоматизируем процессы, увеличиваем продажи и создаём продукты, которые работают на вас
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-            <span>Почасовая ставка: 2 750 ₽ / час</span>
-          </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
             <div
               key={service.title}
@@ -110,11 +118,16 @@ export const ServicesSection = () => {
           ))}
         </div>
 
+        {/* Пояснение к ценам */}
+        <p className="text-center text-sm text-muted-foreground mt-6">
+          Итоговая стоимость зависит от объёма задач, сроков и интеграций. Рассчитаем точную цену после обсуждения проекта.
+        </p>
+
         {/* CTA после секции */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-8">
           <ContactFormPopup>
-            <Button variant="outline" size="lg" className="rounded-full">
-              Узнать стоимость для вашего проекта
+            <Button variant="default" size="lg" className="rounded-full">
+              Обсудить ваш проект
             </Button>
           </ContactFormPopup>
         </div>
