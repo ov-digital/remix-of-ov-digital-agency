@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,21 @@ import {
 import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { submitContactForm, validateCaptcha, type ContactFormData } from "@/lib/form-handler";
+
+declare global {
+  interface Window {
+    smartCaptcha?: {
+      render: (containerId: string, params: {
+        sitekey: string;
+        invisible?: boolean;
+        hideShield?: boolean;
+        callback?: (token: string) => void;
+      }) => number;
+      execute: (widgetId: number) => Promise<string>;
+      reset: (widgetId: number) => void;
+    };
+  }
+}
 
 interface ContactFormPopupProps {
   children: React.ReactNode;
@@ -40,6 +55,30 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const captchaIdRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+        const clientKey = import.meta.env.VITE_YANDEX_CAPTCHA_CLIENT_KEY;
+
+        if (window.smartCaptcha && clientKey && captchaIdRef.current === null) {
+          const widgetId = window.smartCaptcha.render('captcha-container', {
+            sitekey: clientKey,
+            invisible: true,
+            hideShield: true,
+            callback: (token) => {
+              console.log('Captcha solved silently');
+            },
+          });
+          captchaIdRef.current = widgetId;
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   const validateField = (name: string, value: string): string | undefined => {
     switch (name) {
@@ -89,27 +128,26 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      toast.error("Пожалуйста, исправьте ошибки в форме");
-      return;
-    }
-    
-    if (!consent) {
-      toast.error("Необходимо дать согласие на обработку персональных данных");
-      return;
-    }
-    
     setIsSubmitting(true);
 
+    if (!validateForm()) {
+      toast.error("Пожалуйста, исправьте ошибки в форме");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!consent) {
+      toast.error("Необходимо дать согласие на обработку персональных данных");
+      setIsSubmitting(false);
+      return;
+    }
     try {
-      const captchaResult = await validateCaptcha();
+      const captchaResult = await validateCaptcha(captchaIdRef.current);
       if (!captchaResult.isValid) {
-        toast.error("Проверка капчи не пройдена. Попробуйте снова.");
+        toast.error("Проверка безопасности не пройдена. Попробуйте снова.");
         setIsSubmitting(false);
         return;
       }
-
       const result = await submitContactForm(formData, captchaResult.token);
 
       if (result.success) {
@@ -119,6 +157,11 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
         setConsent(false);
         setErrors({});
         setTouched({});
+
+        if (window.smartCaptcha && captchaIdRef.current !== null) {
+          window.smartCaptcha.reset(captchaIdRef.current);
+        }
+
         setTimeout(() => {
           setIsSuccess(false);
           setOpen(false);
@@ -145,108 +188,108 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Обсудить проект</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           {/* Name field */}
           <div className="space-y-1">
             <Input
-              type="text"
-              placeholder="Ваше имя *"
-              value={formData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              onBlur={() => handleBlur("name")}
-              required
-              maxLength={100}
-              className={getInputClassName("name")}
+                type="text"
+                placeholder="Ваше имя *"
+                value={formData.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+                onBlur={() => handleBlur("name")}
+                required
+                maxLength={100}
+                className={getInputClassName("name")}
             />
             {errors.name && touched.name && (
-              <p className="text-xs text-destructive flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.name}
-              </p>
+                <p className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3"/>
+                  {errors.name}
+                </p>
             )}
           </div>
 
           {/* Email field */}
           <div className="space-y-1">
             <Input
-              type="email"
-              placeholder="Email (например: ivan@company.ru) *"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              onBlur={() => handleBlur("email")}
-              required
-              maxLength={255}
-              className={getInputClassName("email")}
+                type="email"
+                placeholder="Email (например: ivan@company.ru) *"
+                value={formData.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                onBlur={() => handleBlur("email")}
+                required
+                maxLength={255}
+                className={getInputClassName("email")}
             />
             {errors.email && touched.email && (
-              <p className="text-xs text-destructive flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.email}
-              </p>
+                <p className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3"/>
+                  {errors.email}
+                </p>
             )}
           </div>
 
           {/* Phone field */}
           <div className="space-y-1">
             <Input
-              type="tel"
-              placeholder="Телефон (например: +7 978 123-45-67)"
-              value={formData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              onBlur={() => handleBlur("phone")}
-              maxLength={20}
-              className={getInputClassName("phone")}
+                type="tel"
+                placeholder="Телефон (например: +7 978 123-45-67)"
+                value={formData.phone}
+                onChange={(e) => handleChange("phone", e.target.value)}
+                onBlur={() => handleBlur("phone")}
+                maxLength={20}
+                className={getInputClassName("phone")}
             />
             {errors.phone && touched.phone && (
-              <p className="text-xs text-destructive flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.phone}
-              </p>
+                <p className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3"/>
+                  {errors.phone}
+                </p>
             )}
           </div>
 
           {/* Message field */}
           <div className="space-y-1">
             <Textarea
-              placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
-              value={formData.message}
-              onChange={(e) => handleChange("message", e.target.value)}
-              onBlur={() => handleBlur("message")}
-              rows={4}
-              required
-              maxLength={1000}
-              className={getInputClassName("message")}
+                placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
+                value={formData.message}
+                onChange={(e) => handleChange("message", e.target.value)}
+                onBlur={() => handleBlur("message")}
+                rows={4}
+                required
+                maxLength={1000}
+                className={getInputClassName("message")}
             />
             {errors.message && touched.message && (
-              <p className="text-xs text-destructive flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.message}
-              </p>
+                <p className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3"/>
+                  {errors.message}
+                </p>
             )}
           </div>
-          
+
           {/* Consent checkbox */}
           <div className="flex items-start space-x-3">
-            <Checkbox 
-              id="consent-popup" 
-              checked={consent}
-              onCheckedChange={(checked) => setConsent(checked === true)}
-              className="mt-1"
+            <Checkbox
+                id="consent-popup"
+                checked={consent}
+                onCheckedChange={(checked) => setConsent(checked === true)}
+                className="mt-1"
             />
             <label htmlFor="consent-popup" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
               Я согласен(а) на обработку моих персональных данных в соответствии с{" "}
-              <Link 
-                to="/privacy-policy" 
-                target="_blank"
-                className="text-primary hover:underline"
-                onClick={(e) => e.stopPropagation()}
+              <Link
+                  to="/privacy-policy"
+                  target="_blank"
+                  className="text-primary hover:underline"
+                  onClick={(e) => e.stopPropagation()}
               >
                 Политикой обработки персональных данных
               </Link>
             </label>
           </div>
-          
+          <div id="captcha-container" className="hidden"></div>
           <p className="text-xs text-muted-foreground">
             Отправляя форму, вы подтверждаете, что ознакомлены и согласны с{" "}
             <Link to="/privacy-policy" target="_blank" className="text-primary hover:underline">
@@ -254,37 +297,37 @@ export const ContactFormPopup = ({ children, className }: ContactFormPopupProps)
             </Link>{" "}
             и даёте согласие на обработку ваших персональных данных в целях связи и обработки вашей заявки.
           </p>
-          
-          <Button 
-            type="submit" 
-            size="lg" 
-            className={`w-full ${isSuccess ? 'bg-green-600 hover:bg-green-700' : ''}`} 
-            disabled={isSubmitting || !consent}
+
+          <Button
+              type="submit"
+              size="lg"
+              className={`w-full ${isSuccess ? 'bg-green-600 hover:bg-green-700' : ''}`}
+              disabled={isSubmitting || !consent}
           >
             {isSubmitting ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Отправка...
-              </>
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin"/>
+                  Отправка...
+                </>
             ) : isSuccess ? (
-              <>
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Отправлено!
-              </>
+                <>
+                  <CheckCircle className="w-4 h-4 mr-2"/>
+                  Отправлено!
+                </>
             ) : (
-              <>
-                Отправить заявку
-                <Send className="w-4 h-4 ml-2" />
-              </>
+                <>
+                  Отправить заявку
+                  <Send className="w-4 h-4 ml-2"/>
+                </>
             )}
           </Button>
           <p className="text-xs text-muted-foreground text-center">
             Или напишите нам в{" "}
-            <a 
-              href="https://t.me/ov_digital_agency" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
+            <a
+                href="https://t.me/ov_digital_agency"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
             >
               Telegram
             </a>
