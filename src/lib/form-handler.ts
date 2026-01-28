@@ -1,9 +1,9 @@
 /**
  * Form Handler Utility
- * 
+ *
  * Этот файл содержит логику отправки форм.
  * Для подключения собственного SMTP/API сервера замените реализацию submitContactForm.
- * 
+ *
  * ТОЧКИ ИНТЕГРАЦИИ:
  * 1. SMTP_ENDPOINT - URL вашего сервера для обработки форм
  * 2. CAPTCHA - добавьте валидацию капчи в validateCaptcha()
@@ -15,12 +15,12 @@
 
 /**
  * URL эндпоинта для отправки форм
- * 
+ *
  * Варианты:
  * 1. Ваш Node.js/Express сервер: '/api/contact'
  * 2. Serverless функция: 'https://your-domain.com/api/send-email'
  * 3. Внешний сервис: 'https://formspree.io/f/your-id' (временное решение)
- * 
+ *
  * ВАЖНО: В production замените на свой сервер!
  */
 const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT || '/api/contact';
@@ -106,34 +106,32 @@ export function validateFormData(data: ContactFormData): { isValid: boolean; err
 
 /**
  * Валидация капчи (Яндекс SmartCaptcha)
- * 
+ *
  * Для интеграции:
  * 1. Добавьте VITE_YANDEX_CAPTCHA_CLIENT_KEY в .env
  * 2. Добавьте скрипт Яндекс SmartCaptcha в index.html
  * 3. Раскомментируйте и настройте этот код
- * 
+ *
  * Документация: https://cloud.yandex.ru/docs/smartcaptcha/
  */
-export async function validateCaptcha(): Promise<CaptchaValidation> {
-  // TODO: Интеграция с Яндекс SmartCaptcha
-  // 
-  // Пример реализации:
-  // 
-  // const captchaKey = import.meta.env.VITE_YANDEX_CAPTCHA_CLIENT_KEY;
-  // if (!captchaKey) {
-  //   console.warn('Captcha key not configured');
-  //   return { isValid: true }; // Пропускаем если не настроено
-  // }
-  // 
-  // try {
-  //   const token = await window.smartCaptcha.execute(captchaKey);
-  //   return { isValid: true, token };
-  // } catch (error) {
-  //   return { isValid: false };
-  // }
+export async function validateCaptcha(widgetId?: number | null): Promise<CaptchaValidation> {
+  if (!window.smartCaptcha || widgetId === null || widgetId === undefined) {
+    const isDev = import.meta.env.DEV;
+    // if (isDev) {
+    //   console.warn('⚠️ Captcha skipped in DEV mode or not initialized');
+    //   return { isValid: true, token: "dev-bypass-token" };
+    // }
+    return { isValid: false };
+  }
 
-  // Временно возвращаем true пока капча не настроена
-  return { isValid: true };
+  try {
+    const token = await window.smartCaptcha.execute(widgetId);
+
+    return { isValid: true, token };
+  } catch (error) {
+    console.error("SmartCaptcha execution error:", error);
+    return { isValid: false };
+  }
 }
 
 // ============================================================================
@@ -144,11 +142,11 @@ let lastSubmitTime = 0;
 
 /**
  * Отправка контактной формы
- * 
+ *
  * @param data - данные формы
  * @param captchaToken - токен капчи (опционально)
  * @returns результат отправки
- * 
+ *
  * СЕРВЕРНАЯ ЧАСТЬ:
  * Ваш сервер должен принимать POST запрос с JSON:
  * {
@@ -158,13 +156,13 @@ let lastSubmitTime = 0;
  *   message: string,
  *   captchaToken?: string
  * }
- * 
+ *
  * И возвращать:
  * { success: true } или { success: false, error: string }
  */
 export async function submitContactForm(
-  data: ContactFormData,
-  captchaToken?: string
+    data: ContactFormData,
+    captchaToken?: string
 ): Promise<FormSubmitResult> {
   // Проверка throttle
   const now = Date.now();
@@ -187,7 +185,7 @@ export async function submitContactForm(
 
   // Проверяем, настроен ли эндпоинт (не дефолтный /api/contact)
   const isEndpointConfigured = FORM_ENDPOINT !== '/api/contact' && FORM_ENDPOINT.length > 0;
-  
+
   if (!isEndpointConfigured) {
     // ДЕМО-РЕЖИМ: сохраняем в localStorage для тестирования
     // В production замените на реальный API
@@ -200,7 +198,7 @@ export async function submitContactForm(
         message: data.message.trim(),
       });
     }
-    
+
     // Сохраняем локально для демонстрации
     const submissions = JSON.parse(localStorage.getItem('form_submissions') || '[]');
     submissions.push({
@@ -208,7 +206,7 @@ export async function submitContactForm(
       timestamp: new Date().toISOString(),
     });
     localStorage.setItem('form_submissions', JSON.stringify(submissions));
-    
+
     lastSubmitTime = now;
     return {
       success: true,
@@ -219,7 +217,7 @@ export async function submitContactForm(
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
-    
+
     const response = await fetch(FORM_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -231,13 +229,13 @@ export async function submitContactForm(
         email: data.email.trim(),
         phone: data.phone?.trim() || '',
         message: data.message.trim(),
-        captchaToken,
+        captchaToken: captchaToken || "",
         _subject: `Новая заявка от ${data.name.trim()} - OV Digital Agency`,
         _timestamp: new Date().toISOString(),
       }),
       signal: controller.signal,
     });
-    
+
     clearTimeout(timeoutId);
 
     if (response.ok) {
