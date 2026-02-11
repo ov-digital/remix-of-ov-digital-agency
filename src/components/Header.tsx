@@ -64,12 +64,16 @@ export const Header = () => {
   // Close menu on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const isInDialog = target.closest('[role="dialog"]') || target.closest('[data-radix-portal]');
+
       if (
-        isMenuOpen &&
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+          isMenuOpen &&
+          menuRef.current &&
+          !menuRef.current.contains(target as Node) &&
+          buttonRef.current &&
+          !buttonRef.current.contains(target as Node) &&
+          !isInDialog
       ) {
         setIsMenuOpen(false);
       }
@@ -77,7 +81,7 @@ export const Header = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMenuOpen]);
+    }, [isMenuOpen]);
 
   const handleNavClick = (href: string) => {
     if (!isHomePage) {
@@ -204,13 +208,11 @@ export const Header = () => {
                   </Link>
                 )
               ))}
-              <div className="mt-4 pt-2">
                 <ContactFormPopup>
                   <Button className="w-full" size="lg">
                     Обсудить проект
                   </Button>
                 </ContactFormPopup>
-              </div>
             </nav>
           </div>
         </>
