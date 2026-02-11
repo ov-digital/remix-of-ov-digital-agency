@@ -115,23 +115,23 @@ export function validateFormData(data: ContactFormData): { isValid: boolean; err
  * Документация: https://cloud.yandex.ru/docs/smartcaptcha/
  */
 export async function validateCaptcha(widgetId?: number | null): Promise<CaptchaValidation> {
-  if (!window.smartCaptcha || widgetId === null || widgetId === undefined) {
-    const isDev = import.meta.env.DEV;
-    // if (isDev) {
-    //   console.warn('⚠️ Captcha skipped in DEV mode or not initialized');
-    //   return { isValid: true, token: "dev-bypass-token" };
-    // }
-    return { isValid: false };
-  }
-
-  try {
-    const token = await window.smartCaptcha.execute(widgetId);
-
-    return { isValid: true, token };
-  } catch (error) {
-    console.error("SmartCaptcha execution error:", error);
-    return { isValid: false };
-  }
+  // TODO: Интеграция с Яндекс SmartCaptcha
+  //
+  // Пример реализации:
+  //
+  // const captchaKey = import.meta.env.VITE_YANDEX_CAPTCHA_CLIENT_KEY;
+  // if (!captchaKey) {
+  //   console.warn('Captcha key not configured');
+  //   return { isValid: true }; // Пропускаем если не настроено
+  // }
+  //
+  // try {
+  //   const token = await window.smartCaptcha.execute(captchaKey);
+  //   return { isValid: true, token };
+  // } catch (error) {
+  //   return { isValid: false };
+  // }
+  return { isValid: false };
 }
 
 // ============================================================================

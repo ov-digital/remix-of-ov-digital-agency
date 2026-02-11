@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Phone, Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
-import { submitContactForm, validateCaptcha, type ContactFormData } from "@/lib/form-handler";
+import { submitContactForm, type ContactFormData } from "@/lib/form-handler";
+import {useCaptcha} from "@/hooks/use-captcha.ts";
+import {SmartCaptcha} from "@yandex/smart-captcha";
 
 interface FormErrors {
   name?: string;
@@ -27,6 +29,7 @@ export const ContactsSection = () => {
   const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const {resetCaptcha,captchaToken, captchaParams} = useCaptcha()
 
   const validateField = (name: string, value: string): string | undefined => {
     switch (name) {
@@ -86,19 +89,17 @@ export const ContactsSection = () => {
       toast.error("Необходимо дать согласие на обработку персональных данных");
       return;
     }
-    
+
+    if (!captchaToken) {
+      toast.error("Пожалуйста, подтвердите, что вы не робот");
+      setIsSubmitting(false);
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      const captchaResult = await validateCaptcha();
-      if (!captchaResult.isValid) {
-        toast.error("Проверка капчи не пройдена. Попробуйте снова.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const result = await submitContactForm(formData, captchaResult.token);
-
+      const result = await submitContactForm(formData, captchaToken);
       if (result.success) {
         setIsSuccess(true);
         toast.success("🎉 Спасибо! Ваша заявка принята. Мы свяжемся с вами в течение 24 часов.");
@@ -106,6 +107,7 @@ export const ContactsSection = () => {
         setConsent(false);
         setErrors({});
         setTouched({});
+        resetCaptcha()
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
         toast.error(result.message);
@@ -136,107 +138,112 @@ export const ContactsSection = () => {
           {/* Contact Form */}
           <div className="bg-background rounded-xl p-6 md:p-8 card-shadow">
             <h3 className="font-semibold text-xl mb-6">Обсудить проект</h3>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name field */}
               <div className="space-y-1">
                 <Input
-                  type="text"
-                  placeholder="Ваше имя *"
-                  value={formData.name}
-                  onChange={(e) => handleChange("name", e.target.value)}
-                  onBlur={() => handleBlur("name")}
-                  required
-                  maxLength={100}
-                  className={getInputClassName("name")}
+                    type="text"
+                    placeholder="Ваше имя *"
+                    value={formData.name}
+                    onChange={(e) => handleChange("name", e.target.value)}
+                    onBlur={() => handleBlur("name")}
+                    required
+                    maxLength={100}
+                    className={getInputClassName("name")}
                 />
                 {errors.name && touched.name && (
-                  <p className="text-xs text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.name}
-                  </p>
+                    <p className="text-xs text-destructive flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3"/>
+                      {errors.name}
+                    </p>
                 )}
               </div>
 
               {/* Email field */}
               <div className="space-y-1">
                 <Input
-                  type="email"
-                  placeholder="Email (например: ivan@company.ru) *"
-                  value={formData.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  onBlur={() => handleBlur("email")}
-                  required
-                  maxLength={255}
-                  className={getInputClassName("email")}
+                    type="email"
+                    placeholder="Email (например: ivan@company.ru) *"
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    onBlur={() => handleBlur("email")}
+                    required
+                    maxLength={255}
+                    className={getInputClassName("email")}
                 />
                 {errors.email && touched.email && (
-                  <p className="text-xs text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.email}
-                  </p>
+                    <p className="text-xs text-destructive flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3"/>
+                      {errors.email}
+                    </p>
                 )}
               </div>
 
               {/* Phone field */}
               <div className="space-y-1">
                 <Input
-                  type="tel"
-                  placeholder="Телефон (например: +7 978 123-45-67)"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  onBlur={() => handleBlur("phone")}
-                  maxLength={20}
-                  className={getInputClassName("phone")}
+                    type="tel"
+                    placeholder="Телефон (например: +7 978 123-45-67)"
+                    value={formData.phone}
+                    onChange={(e) => handleChange("phone", e.target.value)}
+                    onBlur={() => handleBlur("phone")}
+                    maxLength={20}
+                    className={getInputClassName("phone")}
                 />
                 {errors.phone && touched.phone && (
-                  <p className="text-xs text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.phone}
-                  </p>
+                    <p className="text-xs text-destructive flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3"/>
+                      {errors.phone}
+                    </p>
                 )}
               </div>
 
               {/* Message field */}
               <div className="space-y-1">
                 <Textarea
-                  placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
-                  value={formData.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                  onBlur={() => handleBlur("message")}
-                  rows={4}
-                  required
-                  maxLength={1000}
-                  className={getInputClassName("message")}
+                    placeholder="Расскажите о вашем проекте: какие задачи нужно решить? *"
+                    value={formData.message}
+                    onChange={(e) => handleChange("message", e.target.value)}
+                    onBlur={() => handleBlur("message")}
+                    rows={4}
+                    required
+                    maxLength={1000}
+                    className={getInputClassName("message")}
                 />
                 {errors.message && touched.message && (
-                  <p className="text-xs text-destructive flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.message}
-                  </p>
+                    <p className="text-xs text-destructive flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3"/>
+                      {errors.message}
+                    </p>
                 )}
               </div>
-              
+
               {/* Consent checkbox */}
               <div className="flex items-start space-x-3">
-                <Checkbox 
-                  id="consent-section" 
-                  checked={consent}
-                  onCheckedChange={(checked) => setConsent(checked === true)}
-                  className="mt-1"
+                <Checkbox
+                    id="consent-section"
+                    checked={consent}
+                    onCheckedChange={(checked) => setConsent(checked === true)}
+                    className="mt-1"
                 />
-                <label htmlFor="consent-section" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                <label htmlFor="consent-section"
+                       className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
                   Я согласен(а) на обработку моих персональных данных в соответствии с{" "}
-                  <Link 
-                    to="/privacy-policy" 
-                    target="_blank"
-                    className="text-primary hover:underline"
+                  <Link
+                      to="/privacy-policy"
+                      target="_blank"
+                      className="text-primary hover:underline"
                   >
                     Политикой обработки персональных данных
                   </Link>
                 </label>
               </div>
-              
+              <div
+                  className="flex justify-center"
+              >
+                <SmartCaptcha {...captchaParams} language={'ru'}/>
+              </div>
               <p className="text-xs text-muted-foreground">
                 Отправляя форму, вы подтверждаете, что ознакомлены и согласны с{" "}
                 <Link to="/privacy-policy" target="_blank" className="text-primary hover:underline">
@@ -244,28 +251,28 @@ export const ContactsSection = () => {
                 </Link>{" "}
                 и даёте согласие на обработку ваших персональных данных в целях связи и обработки вашей заявки.
               </p>
-              
-              <Button 
-                type="submit" 
-                size="lg" 
-                className={`w-full ${isSuccess ? 'bg-green-600 hover:bg-green-700' : ''}`} 
-                disabled={isSubmitting || !consent}
+
+              <Button
+                  type="submit"
+                  size="lg"
+                  className={`w-full ${isSuccess ? 'bg-green-600 hover:bg-green-700' : ''}`}
+                  disabled={isSubmitting || !consent}
               >
                 {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Отправка...
-                  </>
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin"/>
+                      Отправка...
+                    </>
                 ) : isSuccess ? (
-                  <>
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    Отправлено!
-                  </>
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2"/>
+                      Отправлено!
+                    </>
                 ) : (
-                  <>
-                    Отправить заявку
-                    <Send className="w-4 h-4 ml-2" />
-                  </>
+                    <>
+                      Отправить заявку
+                      <Send className="w-4 h-4 ml-2"/>
+                    </>
                 )}
               </Button>
             </form>
@@ -276,7 +283,7 @@ export const ContactsSection = () => {
             {/* Direct Contacts */}
             <div>
               <h3 className="font-semibold text-xl mb-6">Связаться с нами</h3>
-              
+
               <div className="space-y-4">
                 <a
                   href="mailto:ov.digital.agency@yandex.ru"
