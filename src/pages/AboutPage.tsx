@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Users, Heart, Lightbulb, Target, CheckCircle2, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { PageMeta } from "@/components/PageMeta";
+import { BitrixPartnerSection } from "@/components/BitrixPartnerSection";
 
 const AboutPage = () => {
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -105,6 +106,9 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Bitrix Partner Section */}
+        <BitrixPartnerSection />
 
         {/* Values Section */}
         <section 
